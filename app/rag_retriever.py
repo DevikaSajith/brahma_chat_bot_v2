@@ -1,7 +1,7 @@
 from app.vector_store import get_vector_components
 import gc
 
-def semantic_search(query: str, top_k: int = 2):  # Reduced from 3 to 2
+def semantic_search(query: str, top_k: int = 2):  # Conservative for system resources
     """Lightweight semantic search with minimal memory usage"""
     try:
         model, collection = get_vector_components()
@@ -25,11 +25,15 @@ def semantic_search(query: str, top_k: int = 2):  # Reduced from 3 to 2
                 "metadata": meta
             })
 
-        # Minimal debug output
+        # Debug output with type info
         if not hits:
             print("⚠️ No results")
         else:
-            print(f"✓ Retrieved {len(hits)} docs")
+            types = [h["metadata"].get("type", "unknown") for h in hits]
+            type_counts = {}
+            for t in types:
+                type_counts[t] = type_counts.get(t, 0) + 1
+            print(f"✓ Retrieved {len(hits)} docs: {type_counts}")
 
         # Clean up
         gc.collect()

@@ -43,6 +43,7 @@ Question: {question}
 Answer (based only on the context above):"""
 
     try:
+        print(f"🤖 Generating answer for question: '{question}',with prompt{prompt}")
         response = client.models.generate_content(
             model=model,
             contents=prompt,
