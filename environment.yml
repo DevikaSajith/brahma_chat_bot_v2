@@ -1,0 +1,6 @@
+name: brahma_bot
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+prefix: /home/gokul-p/anaconda3/envs/brahma_bot
