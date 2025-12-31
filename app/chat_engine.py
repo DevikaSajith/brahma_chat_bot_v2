@@ -245,10 +245,30 @@ def chat(user_message: str) -> str:
         return "Sorry, something went wrong."
 
 def format_event_response(event: dict) -> str:
-    """Format event info concisely"""
-    name = event.get("event_name", "Unknown")
+    """Format event info with conversational response variations"""
+    name = event.get("event_name", "Unknown Event")
     date = safe(event.get("date"))
     time = safe(event.get("time"))
     venue = safe(event.get("venue"))
+    details = safe(event.get("details"), "")
+    coordinator = safe(event.get("coordinator"), "")
     
-    return f"{name} is on {date} at {time}, venue: {venue}."
+    # 5 conversational variations
+    templates = [
+        f"{name} is happening on {date} at {time} at {venue}. {details}" + 
+        (f" You can contact {coordinator} for more details." if coordinator != "not specified" else ""),
+        
+        f"Sure! {name} is scheduled for {date} at {time}. {details} The venue is {venue}." +
+        (f" For more information, reach out to {coordinator}." if coordinator != "not specified" else ""),
+        
+        f"{name} will be held on {date} at {time} at {venue}. {details}" +
+        (f" If you have questions, contact {coordinator}." if coordinator != "not specified" else ""),
+        
+        f"Great question! {name} takes place on {date} at {time}. {details} It's being held at {venue}." +
+        (f" The coordinator is {coordinator}." if coordinator != "not specified" else ""),
+        
+        f"{name} is on {date} at {time}, venue is {venue}. {details}" +
+        (f" Get in touch with {coordinator} if you need more info." if coordinator != "not specified" else "")
+    ]
+    
+    return random.choice(templates)
