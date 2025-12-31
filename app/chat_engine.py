@@ -264,12 +264,12 @@ def format_event_response(event: dict, query: str = "") -> str:
     
     q_lower = query.lower()
     
-    # Detect what specific info is being asked
-    asking_venue = any(word in q_lower for word in ["venue", "where", "location", "place", "held"])
-    asking_time = any(word in q_lower for word in ["time", "when", "start", "begin"])
-    asking_date = any(word in q_lower for word in ["date", "day", "when"])
-    asking_coordinator = any(word in q_lower for word in ["coordinator", "contact", "who", "organize", "reach"])
-    asking_what = any(word in q_lower for word in ["what", "about", "detail", "describe"])
+    # Detect what specific info is being asked (with common misspellings)
+    asking_venue = any(word in q_lower for word in ["venue", "venu", "venie", "where", "wher", "location", "place", "held", "happening"])
+    asking_time = any(word in q_lower for word in ["time", "tym", "tyme", "timing", "timming", "start", "starts", "begin", "begins"])
+    asking_date = any(word in q_lower for word in ["date", "dat", "day", "when", "wen", "schedule", "scheduled"])
+    asking_coordinator = any(word in q_lower for word in ["coordinator", "cordinator", "co-ordinator", "coordnator", "contact", "contac", "who", "organize", "organise", "organizer", "reach", "incharge", "in-charge"])
+    asking_what = any(word in q_lower for word in ["what", "wat", "wht", "about", "abt", "detail", "details", "describe", "description", "info", "information"])
     
     # Count how many aspects are being asked
     aspects_count = sum([asking_venue, asking_time, asking_date, asking_coordinator, asking_what])
@@ -307,6 +307,17 @@ def format_event_response(event: dict, query: str = "") -> str:
         ]
         return random.choice(responses)
     
+    # If asking about all three (date + time + venue)
+    if asking_date and asking_time and asking_venue:
+        responses = [
+            f"{name} is on {date} at {time} at {venue}.",
+            f"It's scheduled for {date} at {time}, venue: {venue}.",
+            f"{name} happens on {date} at {time}. Location: {venue}.",
+            f"Date: {date}, Time: {time}, Venue: {venue}.",
+            f"{name} will be held on {date} at {time} at {venue}."
+        ]
+        return random.choice(responses)
+    
     # If asking about when (date + time)
     if asking_date and asking_time:
         responses = [
@@ -315,6 +326,28 @@ def format_event_response(event: dict, query: str = "") -> str:
             f"{name} happens on {date}, starting at {time}.",
             f"The event is on {date} at {time}.",
             f"Mark {date} at {time} for {name}!"
+        ]
+        return random.choice(responses)
+    
+    # If asking about time and venue
+    if asking_time and asking_venue and not asking_date:
+        responses = [
+            f"{name} is at {time} at {venue}.",
+            f"It starts at {time}, venue is {venue}.",
+            f"{name} begins at {time} and will be held at {venue}.",
+            f"Time: {time}, Location: {venue}.",
+            f"It's at {time} at {venue}."
+        ]
+        return random.choice(responses)
+    
+    # If asking about date and venue
+    if asking_date and asking_venue and not asking_time:
+        responses = [
+            f"{name} is on {date} at {venue}.",
+            f"It's happening on {date} at {venue}.",
+            f"{name} will be held on {date} at {venue}.",
+            f"Date: {date}, Venue: {venue}.",
+            f"On {date} at {venue}."
         ]
         return random.choice(responses)
     
