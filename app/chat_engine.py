@@ -8,20 +8,29 @@ import gc
 
 # ---------------- CONFIG ---------------- #
 
-# Reduced response variations to save memory
+# Response variations
 BRAHMA_RESPONSES = [
     "Brahma '26 is the annual cultural festival of Adi Shankara Institute of Engineering and Technology (ASIET), celebrating music, dance, art, and creative expression.",
-    "Brahma is ASIET's flagship cultural fest featuring competitive events, pro-shows, and workshops."
+    "Brahma is ASIET's flagship cultural fest featuring competitive events, pro-shows, and workshops.",
+    "Brahma '26 is ASIET's premier cultural festival showcasing talent in music, dance, drama, and various art forms.",
+    "The Brahma festival is ASIET's biggest cultural celebration with exciting events, competitions, and performances.",
+    "Brahma '26 brings together students for an amazing cultural experience at ASIET with diverse events and activities."
 ]
 
 ASHWAMEDHA_RESPONSES = [
     "Ashwamedha is ASIET's national-level technical fest showcasing innovation and engineering excellence.",
-    "Ashwamedha features coding contests, hackathons, robotics events, and technical competitions."
+    "Ashwamedha features coding contests, hackathons, robotics events, and technical competitions.",
+    "Ashwamedha is the technical fest at ASIET where students showcase their engineering skills and innovation.",
+    "ASIET's Ashwamedha is a premier technical festival with competitions in coding, robotics, and various tech domains.",
+    "Ashwamedha brings together tech enthusiasts for exciting competitions and workshops at ASIET."
 ]
 
 OUT_OF_CONTEXT_RESPONSES = [
     "I can help only with Brahma '26 and ASIET events.",
-    "That's not related to the Brahma festival."
+    "That's not related to the Brahma festival.",
+    "I specialize in Brahma '26 information. Please ask about festival events!",
+    "Sorry, I can only assist with questions about Brahma '26 and ASIET events.",
+    "That's outside my scope. I'm here to help with Brahma festival queries!"
 ]
 
 GREETING_RESPONSES = [
@@ -211,7 +220,7 @@ def chat(user_message: str) -> str:
         # Try exact event match first (fastest)
         event = find_exact_event(query)
         if event:
-            return format_event_response(event)
+            return format_event_response(event, query)
 
         # Semantic search (more expensive)
         try:
@@ -244,8 +253,8 @@ def chat(user_message: str) -> str:
         print(f"❌ Chat error: {e}")
         return "Sorry, something went wrong."
 
-def format_event_response(event: dict) -> str:
-    """Format event info with conversational response variations"""
+def format_event_response(event: dict, query: str = "") -> str:
+    """Format event info with conversational response variations, optimized to answer only what's asked"""
     name = event.get("event_name", "Unknown Event")
     date = safe(event.get("date"))
     time = safe(event.get("time"))
@@ -253,7 +262,88 @@ def format_event_response(event: dict) -> str:
     details = safe(event.get("details"), "")
     coordinator = safe(event.get("coordinator"), "")
     
-    # 5 conversational variations
+    q_lower = query.lower()
+    
+    # Detect what specific info is being asked
+    asking_venue = any(word in q_lower for word in ["venue", "where", "location", "place", "held"])
+    asking_time = any(word in q_lower for word in ["time", "when", "start", "begin"])
+    asking_date = any(word in q_lower for word in ["date", "day", "when"])
+    asking_coordinator = any(word in q_lower for word in ["coordinator", "contact", "who", "organize", "reach"])
+    asking_what = any(word in q_lower for word in ["what", "about", "detail", "describe"])
+    
+    # Count how many aspects are being asked
+    aspects_count = sum([asking_venue, asking_time, asking_date, asking_coordinator, asking_what])
+    
+    # If only asking about venue
+    if asking_venue and aspects_count == 1:
+        responses = [
+            f"{name} will be held at {venue}.",
+            f"The venue for {name} is {venue}.",
+            f"{name} is at {venue}.",
+            f"You'll find {name} at {venue}.",
+            f"The location is {venue} for {name}."
+        ]
+        return random.choice(responses)
+    
+    # If only asking about time
+    if asking_time and not asking_date and aspects_count == 1:
+        responses = [
+            f"{name} starts at {time}.",
+            f"The event begins at {time}.",
+            f"{name} is scheduled for {time}.",
+            f"It's at {time}.",
+            f"The time is {time} for {name}."
+        ]
+        return random.choice(responses)
+    
+    # If only asking about date
+    if asking_date and not asking_time and aspects_count == 1:
+        responses = [
+            f"{name} is on {date}.",
+            f"The date is {date}.",
+            f"It's happening on {date}.",
+            f"{name} is scheduled for {date}.",
+            f"Mark your calendar for {date}!"
+        ]
+        return random.choice(responses)
+    
+    # If asking about when (date + time)
+    if asking_date and asking_time:
+        responses = [
+            f"{name} is on {date} at {time}.",
+            f"It's scheduled for {date} at {time}.",
+            f"{name} happens on {date}, starting at {time}.",
+            f"The event is on {date} at {time}.",
+            f"Mark {date} at {time} for {name}!"
+        ]
+        return random.choice(responses)
+    
+    # If only asking about coordinator
+    if asking_coordinator and aspects_count <= 2:
+        if coordinator != "not specified":
+            responses = [
+                f"The coordinator for {name} is {coordinator}.",
+                f"You can contact {coordinator} for {name}.",
+                f"{coordinator} is coordinating {name}.",
+                f"Reach out to {coordinator} for more details about {name}.",
+                f"The point of contact is {coordinator}."
+            ]
+            return random.choice(responses)
+        else:
+            return f"Coordinator information is not available for {name}."
+    
+    # If asking what the event is about
+    if asking_what and aspects_count <= 2 and details:
+        responses = [
+            f"{name} - {details}",
+            f"{name} is {details.lower()}",
+            f"It's {details.lower()}",
+            f"{details}",
+            f"{name}: {details}"
+        ]
+        return random.choice(responses)
+    
+    # Default: Full information with conversational variations
     templates = [
         f"{name} is happening on {date} at {time} at {venue}. {details}" + 
         (f" You can contact {coordinator} for more details." if coordinator != "not specified" else ""),
@@ -268,7 +358,10 @@ def format_event_response(event: dict) -> str:
         (f" The coordinator is {coordinator}." if coordinator != "not specified" else ""),
         
         f"{name} is on {date} at {time}, venue is {venue}. {details}" +
-        (f" Get in touch with {coordinator} if you need more info." if coordinator != "not specified" else "")
+        (f" Get in touch with {coordinator} if you need more info." if coordinator != "not specified" else ""),
+        
+        f"{name} - {details} Scheduled for {date} at {time}. Location: {venue}." +
+        (f" Contact: {coordinator}." if coordinator != "not specified" else "")
     ]
     
     return random.choice(templates)
