@@ -47,6 +47,31 @@ THANKYOU_RESPONSES = [
     "Anytime! Enjoy Brahma '26! 🎊",
 ]
 
+BYE_RESPONSES = [
+    "Goodbye! See you at Brahma '26! 🎉",
+    "Bye! Have a great time at the fest! 👋",
+    "See you later! Don't miss Brahma '26! 🎊",
+    "Take care! Enjoy the festival! 😊",
+]
+
+HELP_RESPONSES = [
+    "I can help you with: Event details, dates, times, venues, coordinators, and festival information. Just ask!",
+    "Ask me about Brahma '26 events, schedules, locations, or anything related to ASIET's cultural fest!",
+    "I'm here to answer questions about event timings, venues, coordinators, and festival details. What would you like to know?",
+]
+
+IDENTITY_RESPONSES = [
+    "I'm the Brahma '26 assistant bot! I help with information about ASIET's cultural festival. 🎭",
+    "I'm your friendly Brahma '26 info bot, here to answer questions about the fest! 🎉",
+    "I'm an AI assistant dedicated to helping you with Brahma '26 and ASIET event information! 😊",
+]
+
+CAPABILITY_RESPONSES = [
+    "I can tell you about event schedules, venues, dates, coordinators, and details about Brahma '26 and Ashwamedha festivals!",
+    "I provide information on all Brahma '26 events including timings, locations, and how to participate. Ask away!",
+    "I help with event details, festival schedules, venue information, and coordinator contacts for Brahma '26! 🎊",
+]
+
 # ---------------- HELPERS ---------------- #
 
 def tokenize(text: str) -> set:
@@ -97,10 +122,16 @@ def find_exact_event(query: str):
         e_tokens = tokenize(name)
         e_normalized = normalize_text(name)
 
-        # Check token-based match OR normalized string match
-        if (e_tokens and e_tokens.issubset(q_tokens)) or \
-           (len(e_normalized) > 3 and e_normalized in q_normalized):
+        # Token-based match (all event words in query)
+        if e_tokens and e_tokens.issubset(q_tokens):
             matched.append(event)
+        # Normalized match - but only if lengths are similar (prevents "brma" matching "bandofbrahma")
+        elif len(e_normalized) > 3 and e_normalized in q_normalized:
+            # Only match if the normalized event name is a substantial part of the query
+            # or if they're similar in length (to prevent partial substring false matches)
+            length_ratio = len(e_normalized) / len(q_normalized) if q_normalized else 0
+            if length_ratio > 0.6 or e_normalized == q_normalized:
+                matched.append(event)
 
     if len(matched) == 1:
         return matched[0]
@@ -126,6 +157,31 @@ def is_thankyou(query: str) -> bool:
     thanks = ["thanks", "thank you", "thankyou", "thx", "ty", "appreciate"]
     q_lower = query.lower().strip()
     return any(t in q_lower for t in thanks)
+
+def is_goodbye(query: str) -> bool:
+    """Check if message is a goodbye"""
+    goodbyes = ["bye", "goodbye", "good bye", "see you", "see ya", "later", "farewell", "cya"]
+    q_lower = query.lower().strip()
+    return any(g in q_lower for g in goodbyes) and len(q_lower.split()) <= 3
+
+def is_help_request(query: str) -> bool:
+    """Check if user is asking for help"""
+    help_keywords = ["help", "how to use", "what can you do", "how do you work", "guide", "assist"]
+    q_lower = query.lower().strip()
+    return any(h in q_lower for h in help_keywords) and len(q_lower.split()) <= 6
+
+def is_identity_question(query: str) -> bool:
+    """Check if user is asking who the bot is"""
+    identity_patterns = ["who are you", "what are you", "your name", "who r u", "what r u"]
+    q_lower = query.lower().strip()
+    return any(p in q_lower for p in identity_patterns)
+
+def is_capability_question(query: str) -> bool:
+    """Check if user is asking what the bot can do"""
+    capability_patterns = ["what can you", "what do you", "your capabilities", "can you help", 
+                          "what can u", "what do u", "what you do"]
+    q_lower = query.lower().strip()
+    return any(p in q_lower for p in capability_patterns)
 
 def is_simple_fest_query(query: str) -> bool:
     """Check if it's a simple 'what is brahma/ashwamedha' query"""
@@ -191,8 +247,16 @@ def is_relevant_query(query: str) -> bool:
                 return True
             
             # Or if normalized versions match (handles "spotdance" vs "spot dance")
-            if len(e_normalized) > 4 and (e_normalized in q_normalized or q_normalized in e_normalized):
-                return True
+            # But prevent false matches: require similar lengths or exact match
+            if len(e_normalized) > 4:
+                if e_normalized in q_normalized:
+                    length_ratio = len(e_normalized) / len(q_normalized)
+                    if length_ratio > 0.5:  # Event name is substantial part of query
+                        return True
+                elif q_normalized in e_normalized:
+                    length_ratio = len(q_normalized) / len(e_normalized)
+                    if length_ratio > 0.5:  # Query is substantial part of event name
+                        return True
     
     # Fuzzy match for common misspellings
     for word in re.findall(r"\b[a-zA-Z]{4,}\b", q_lower):  # Words 4+ chars
@@ -220,6 +284,22 @@ def chat(user_message: str) -> str:
         # Handle thank you
         if is_thankyou(query):
             return random.choice(THANKYOU_RESPONSES)
+        
+        # Handle goodbye
+        if is_goodbye(query):
+            return random.choice(BYE_RESPONSES)
+        
+        # Handle help requests
+        if is_help_request(query):
+            return random.choice(HELP_RESPONSES)
+        
+        # Handle identity questions
+        if is_identity_question(query):
+            return random.choice(IDENTITY_RESPONSES)
+        
+        # Handle capability questions
+        if is_capability_question(query):
+            return random.choice(CAPABILITY_RESPONSES)
 
         # Quick fest detection - but only for simple queries
         fest = fuzzy_fest_match(query)
