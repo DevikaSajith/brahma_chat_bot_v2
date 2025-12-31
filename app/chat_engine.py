@@ -52,6 +52,10 @@ THANKYOU_RESPONSES = [
 def tokenize(text: str) -> set:
     return set(re.findall(r"\b[a-zA-Z]+\b", text.lower()))
 
+def normalize_text(text: str) -> str:
+    """Normalize text by removing spaces, hyphens, and converting to lowercase"""
+    return re.sub(r"[\s-]+", "", text.lower())
+
 def safe(val, fallback="not specified"):
     return val if val else fallback
 
@@ -82,16 +86,20 @@ def fuzzy_fest_match(query: str, threshold: float = 0.72):
     return None
 
 def find_exact_event(query: str):
-    """Find event with simplified matching"""
+    """Find event with simplified matching, handles space/hyphen variations"""
     q_tokens = tokenize(query)
+    q_normalized = normalize_text(query)
     matched = []
 
     # Limit search to cached events
     for event in EVENT_CACHE[:50]:  # Check only first 50
         name = event.get("event_name", "")
         e_tokens = tokenize(name)
+        e_normalized = normalize_text(name)
 
-        if e_tokens and e_tokens.issubset(q_tokens):
+        # Check token-based match OR normalized string match
+        if (e_tokens and e_tokens.issubset(q_tokens)) or \
+           (len(e_normalized) > 3 and e_normalized in q_normalized):
             matched.append(event)
 
     if len(matched) == 1:
@@ -157,6 +165,7 @@ def is_relevant_query(query: str) -> bool:
                 "participate", "team", "prize", "competition", "workshop"]
     q_lower = query.lower()
     q_tokens = tokenize(q_lower)
+    q_normalized = normalize_text(query)
     
     # Direct keyword match
     if any(kw in q_lower for kw in keywords):
@@ -167,6 +176,8 @@ def is_relevant_query(query: str) -> bool:
         event_name = event.get("event_name", "").lower()
         if event_name:
             event_tokens = tokenize(event_name)
+            e_normalized = normalize_text(event_name)
+            
             # If ANY meaningful word from event name is in query
             common_tokens = event_tokens.intersection(q_tokens)
             if common_tokens:
@@ -174,8 +185,13 @@ def is_relevant_query(query: str) -> bool:
                 meaningful_matches = [t for t in common_tokens if len(t) >= 3]
                 if meaningful_matches:
                     return True
+            
             # Or if event name appears as substring
             if len(event_name) > 4 and event_name in q_lower:
+                return True
+            
+            # Or if normalized versions match (handles "spotdance" vs "spot dance")
+            if len(e_normalized) > 4 and (e_normalized in q_normalized or q_normalized in e_normalized):
                 return True
     
     # Fuzzy match for common misspellings
@@ -260,7 +276,7 @@ def format_event_response(event: dict, query: str = "") -> str:
     time = safe(event.get("time"))
     venue = safe(event.get("venue"))
     details = safe(event.get("details"), "")
-    coordinator = safe(event.get("coordinator"), "")
+    coordinators = safe(event.get("coordinators"), "")
     
     q_lower = query.lower()
     
@@ -268,11 +284,11 @@ def format_event_response(event: dict, query: str = "") -> str:
     asking_venue = any(word in q_lower for word in ["venue", "venu", "venie", "where", "wher", "location", "place", "held", "happening"])
     asking_time = any(word in q_lower for word in ["time", "tym", "tyme", "timing", "timming", "start", "starts", "begin", "begins"])
     asking_date = any(word in q_lower for word in ["date", "dat", "day", "when", "wen", "schedule", "scheduled"])
-    asking_coordinator = any(word in q_lower for word in ["coordinator", "cordinator", "co-ordinator", "coordnator", "contact", "contac", "who", "organize", "organise", "organizer", "reach", "incharge", "in-charge"])
+    asking_coordinators = any(word in q_lower for word in ["coordinators", "coordinator", "cordinator", "cordinators", "co-ordinator", "coordnator", "contact", "contac", "who", "organize", "organise", "organizer", "reach", "incharge", "in-charge"])
     asking_what = any(word in q_lower for word in ["what", "wat", "wht", "about", "abt", "detail", "details", "describe", "description", "info", "information"])
     
     # Count how many aspects are being asked
-    aspects_count = sum([asking_venue, asking_time, asking_date, asking_coordinator, asking_what])
+    aspects_count = sum([asking_venue, asking_time, asking_date, asking_coordinators, asking_what])
     
     # If only asking about venue
     if asking_venue and aspects_count == 1:
@@ -351,19 +367,19 @@ def format_event_response(event: dict, query: str = "") -> str:
         ]
         return random.choice(responses)
     
-    # If only asking about coordinator
-    if asking_coordinator and aspects_count <= 2:
-        if coordinator != "not specified":
+    # If only asking about coordinators
+    if asking_coordinators and aspects_count <= 2:
+        if coordinators != "not specified":
             responses = [
-                f"The coordinator for {name} is {coordinator}.",
-                f"You can contact {coordinator} for {name}.",
-                f"{coordinator} is coordinating {name}.",
-                f"Reach out to {coordinator} for more details about {name}.",
-                f"The point of contact is {coordinator}."
+                f"The coordinators for {name} are {coordinators}.",
+                f"You can contact {coordinators} for {name}.",
+                f"{coordinators} are coordinating {name}.",
+                f"Reach out to {coordinators} for more details about {name}.",
+                f"The point of contact is {coordinators}."
             ]
             return random.choice(responses)
         else:
-            return f"Coordinator information is not available for {name}."
+            return f"Coordinators information is not available for {name}."
     
     # If asking what the event is about
     if asking_what and aspects_count <= 2 and details:
@@ -379,22 +395,22 @@ def format_event_response(event: dict, query: str = "") -> str:
     # Default: Full information with conversational variations
     templates = [
         f"{name} is happening on {date} at {time} at {venue}. {details}" + 
-        (f" You can contact {coordinator} for more details." if coordinator != "not specified" else ""),
+        (f" You can contact {coordinators} for more details." if coordinators != "not specified" else ""),
         
         f"Sure! {name} is scheduled for {date} at {time}. {details} The venue is {venue}." +
-        (f" For more information, reach out to {coordinator}." if coordinator != "not specified" else ""),
+        (f" For more information, reach out to {coordinators}." if coordinators != "not specified" else ""),
         
         f"{name} will be held on {date} at {time} at {venue}. {details}" +
-        (f" If you have questions, contact {coordinator}." if coordinator != "not specified" else ""),
+        (f" If you have questions, contact {coordinators}." if coordinators != "not specified" else ""),
         
         f"Great question! {name} takes place on {date} at {time}. {details} It's being held at {venue}." +
-        (f" The coordinator is {coordinator}." if coordinator != "not specified" else ""),
+        (f" The coordinators are {coordinators}." if coordinators != "not specified" else ""),
         
         f"{name} is on {date} at {time}, venue is {venue}. {details}" +
-        (f" Get in touch with {coordinator} if you need more info." if coordinator != "not specified" else ""),
+        (f" Get in touch with {coordinators} if you need more info." if coordinators != "not specified" else ""),
         
         f"{name} - {details} Scheduled for {date} at {time}. Location: {venue}." +
-        (f" Contact: {coordinator}." if coordinator != "not specified" else "")
+        (f" Contact: {coordinators}." if coordinators != "not specified" else "")
     ]
     
     return random.choice(templates)
