@@ -142,33 +142,37 @@ def is_simple_fest_query(query: str) -> bool:
     return False
 
 def is_relevant_query(query: str) -> bool:
-    # Limit search to cached events
-    for event in EVENT_CACHE[:50]:  # Check only first 50
-        name = event.get("event_name", "")
-        e_tokens = tokenize(name)
-
-        if e_tokens and e_tokens.issubset(q_tokens):
-            matched.append(event)
-
-    if len(matched) == 1:
-        return matched[0]
-    
-    return None
-
-def is_relevant_query(query: str) -> bool:
-    """Quick relevance check with fuzzy matching"""
+    """Quick relevance check with fuzzy matching and event name detection"""
     keywords = ["event", "brahma", "ashwamedha", "fest", "festival", "college", 
-                "when", "where", "what", "date", "time", "venue", "asiet"]
+                "when", "where", "what", "date", "time", "venue", "asiet", "registration",
+                "participate", "team", "prize", "competition", "workshop"]
     q_lower = query.lower()
+    q_tokens = tokenize(q_lower)
     
     # Direct keyword match
     if any(kw in q_lower for kw in keywords):
         return True
     
+    # Check if query matches any event name from cache (even partially)
+    for event in EVENT_CACHE[:50]:  # Check first 50 events
+        event_name = event.get("event_name", "").lower()
+        if event_name:
+            event_tokens = tokenize(event_name)
+            # If ANY meaningful word from event name is in query
+            common_tokens = event_tokens.intersection(q_tokens)
+            if common_tokens:
+                # Filter out very short words (like "a", "of", "the")
+                meaningful_matches = [t for t in common_tokens if len(t) >= 3]
+                if meaningful_matches:
+                    return True
+            # Or if event name appears as substring
+            if len(event_name) > 4 and event_name in q_lower:
+                return True
+    
     # Fuzzy match for common misspellings
     for word in re.findall(r"\b[a-zA-Z]{4,}\b", q_lower):  # Words 4+ chars
         for kw in ["brahma", "ashwamedha", "event", "festival"]:
-            if similarity(word, kw) >= 0.7:  # Lower threshold
+            if similarity(word, kw) >= 0.7:
                 return True
     
     return False
