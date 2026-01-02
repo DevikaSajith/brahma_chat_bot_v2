@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+# --- ADDED THIS IMPORT ---
+from fastapi.middleware.cors import CORSMiddleware
+# -------------------------
 from app.chat_engine import chat
 from app.json_store import load_events_from_json
 from app.cache import load_event_cache
@@ -28,6 +31,16 @@ app = FastAPI(
     description="Memory-efficient version (1-2GB RAM)",
     version="1.0-lite"
 )
+
+# --- ADDED CORS CONFIGURATION HERE ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows your local HTML file to connect
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+# -------------------------------------
 
 class ChatRequest(BaseModel):
     message: str

@@ -13,7 +13,7 @@ from app.doc_loader import load_fest_documents
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 VECTOR_DIR = "vector_store_lite"
 COLLECTION_NAME = "event_details_lite"
-FEST_DOC_PATH = "data/fest_info.docx"
+FEST_DOC_PATH = "data/festivals.txt"
 
 # Memory limits
 MAX_BATCH_SIZE = 25  # Smaller batches
@@ -47,11 +47,11 @@ def get_vector_components():
 
     if _collection is None:
         print("🔧 Initializing lightweight ChromaDB...")
-        _client = chromadb.Client(
-            Settings(
-                persist_directory=VECTOR_DIR,
+        # Use PersistentClient for actual persistence
+        _client = chromadb.PersistentClient(
+            path=VECTOR_DIR,
+            settings=Settings(
                 anonymized_telemetry=False,
-                # Memory-efficient settings
                 allow_reset=True
             )
         )
@@ -93,19 +93,27 @@ def build_vector_store(events):
         })
         ids.append(event["event_id"])
 
-    # Fest documents (optional, only if file exists and is small)
+    # Fest documents (optional, only if file exists)
     if os.path.exists(FEST_DOC_PATH):
+        print(f"📄 Loading fest documents from: {FEST_DOC_PATH}")
         try:
             fest_sections = load_fest_documents(FEST_DOC_PATH)
-            # Limit fest sections to save memory
-            for i, section in enumerate(fest_sections[:20]):  # Max 20 sections
-                if len(section) > 500:  # Truncate long sections
-                    section = section[:500]
-                documents.append(section)
-                metadatas.append({"type": "fest_info"})
+            print(f"   Found {len(fest_sections)} fest sections")
+            
+            # Add all fest sections (already chunked appropriately by doc_loader)
+            for i, section in enumerate(fest_sections):
+                documents.append(section)  # No additional truncation
+                metadatas.append({
+                    "type": "fest_info",
+                    "section": i
+                })
                 ids.append(f"fest_{i}")
+            
+            print(f"   ✅ Added {len(fest_sections)} fest sections to vector store")
         except Exception as e:
-            print(f"⚠️ Skipping fest documents: {e}")
+            print(f"⚠️ Error loading fest documents: {e}")
+            import traceback
+            traceback.print_exc()
 
     # Process in small batches
     batch_size = MAX_BATCH_SIZE
