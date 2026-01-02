@@ -1,145 +1,353 @@
 [
   {
-    "id": "row_001",
-    "event_id": "evt_001",
-    "event_name": "THEME SHOW",
-    "venue": "MAIN STAGE",
-    "date": "2026-03-06",
-    "time": "06:00 PM",
-    "details": "Flagship cultural fashion show competition.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster1.png",
-    "event_pass": "pass_111"
+    "event_name": "Brian Hodkiewicz-Considine",
+    "venue": "demitto adhaero adamo abbas assumenda",
+    "time": "congregatio",
+    "date": "2025-03-08T05:33:23.624+00:00",
+    "details": null,
+    "coordinator": [
+      "perspiciatis pauper succedo dedecor",
+      "aedificium peccatus",
+      "inflammatio",
+      "tabernus caput"
+    ],
+    "fest": "BRAHMA",
+    "slots": 59,
+    "poster": "https://stupendous-pearl.info",
+    "amount": 16,
+    "category": "GENERAL"
   },
   {
-    "id": "row_002",
-    "event_id": "evt_002",
-    "event_name": "CHOREO NIGHT",
-    "venue": "MAIN STAGE",
-    "date": "2026-03-07",
-    "time": "07:30 PM",
-    "details": "Inter-college dance choreography competition.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster2.png",
-    "event_pass": "pass_222"
+    "event_name": "Ms. Florence Rutherford",
+    "venue": "adulatio deludo",
+    "time": "cenaculum umerus annus",
+    "date": "2025-08-14T22:11:54.586+00:00",
+    "details": null,
+    "coordinator": [
+      "addo conturbo",
+      "quis",
+      "cilicium illo caste"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 17,
+    "poster": "https://parallel-pharmacopoeia.net",
+    "amount": 85,
+    "category": "CULTURAL"
   },
   {
-    "id": "row_003",
-    "event_id": "evt_003",
-    "event_name": "DJ WAR",
-    "venue": "MAIN STAGE",
-    "date": "2026-03-08",
-    "time": "09:00 PM",
-    "details": "Live battle of the DJs.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster3.png",
-    "event_pass": "pass_333"
+    "event_name": "Geoffrey Kiehn",
+    "venue": "conspergo teres conduco creator",
+    "time": "terminatio spectaculum altus aeger",
+    "date": "2025-04-27T23:31:34.857+00:00",
+    "details": null,
+    "coordinator": [
+      "vae",
+      "canis aggero demergo"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 48,
+    "poster": "https://insidious-blossom.name",
+    "amount": 27,
+    "category": "TECHNICAL"
   },
   {
-    "id": "row_004",
-    "event_id": "evt_004",
-    "event_name": "VOICE OF BRAHMA",
-    "venue": "MAIN STAGE",
-    "date": "2026-03-06",
-    "time": "10:00 AM",
-    "details": "Solo and group singing competition.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster4.png",
-    "event_pass": "pass_444"
+    "event_name": "Kate Schulist-Hodkiewicz",
+    "venue": "correptius",
+    "time": "vita",
+    "date": "2025-01-26T11:21:43.640+00:00",
+    "details": null,
+    "coordinator": [
+      "adipiscor cumque numquam taceo timidus",
+      "suggero",
+      "conicio desparatus vilitas",
+      "sopor inflammatio antea"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 14,
+    "poster": "https://flashy-daughter.biz",
+    "amount": 77,
+    "category": "CULTURAL"
   },
   {
-    "id": "row_005",
-    "event_id": "evt_005",
-    "event_name": "MUDHRA",
-    "venue": "MAIN STAGE",
-    "date": "2026-03-07",
-    "time": "02:00 PM",
-    "details": "Traditional dance performance.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster5.png",
-    "event_pass": "pass_555"
+    "event_name": "Amy McCullough",
+    "venue": "acerbitas error",
+    "time": "valetudo aspernatur comes",
+    "date": "2025-01-20T23:33:17.058+00:00",
+    "details": null,
+    "coordinator": [
+      "atqui conitor celo",
+      "desino"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 1,
+    "poster": "https://caring-blight.org/",
+    "amount": 3,
+    "category": "CULTURAL"
   },
   {
-    "id": "row_006",
-    "event_id": "evt_006",
-    "event_name": "SPOT DANCE",
-    "venue": "LOBBY",
-    "date": "2026-03-08",
-    "time": "11:30 AM",
-    "details": "On-the-spot dance challenge.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster6.png",
-    "event_pass": "pass_666"
+    "event_name": "Noah Dicki",
+    "venue": "ago magnam ratione despecto reiciendis",
+    "time": "sui corrupti volaticus aegrus",
+    "date": "2025-10-04T13:16:36.859+00:00",
+    "details": null,
+    "coordinator": [
+      "despecto stips aequus avaritia adnuo",
+      "super",
+      "beatus terreo virgo absque",
+      "odit vero creator avaritia",
+      "apto atqui"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 82,
+    "poster": "https://hasty-ceramic.org",
+    "amount": 91,
+    "category": "TECHNICAL"
   },
   {
-    "id": "row_007",
-    "event_id": "evt_007",
-    "event_name": "STEP N SYNCRO",
-    "venue": "MAIN STAGE",
-    "date": "2026-03-06",
-    "time": "04:00 PM",
-    "details": "Synchronized team dance event.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster7.png",
-    "event_pass": "pass_777"
+    "event_name": "Ms. Jane Turner",
+    "venue": "sulum praesentium angulus despecto communis",
+    "time": "strues tersus totam",
+    "date": "2025-12-04T04:31:49.435+00:00",
+    "details": null,
+    "coordinator": [
+      "alioqui",
+      "subiungo cur"
+    ],
+    "fest": "BRAHMA",
+    "slots": 66,
+    "poster": "https://strident-swanling.info",
+    "amount": 63,
+    "category": "CULTURAL"
   },
   {
-    "id": "row_008",
-    "event_id": "evt_008",
-    "event_name": "RAGAM",
-    "venue": "AUDITORIUM",
-    "date": "2026-03-07",
-    "time": "01:30 PM",
-    "details": "Musical instrument and vocal medley.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster8.png",
-    "event_pass": "pass_888"
+    "event_name": "Mattie Ryan",
+    "venue": "temeritas conservo audax",
+    "time": "valetudo tamen",
+    "date": "2025-03-17T22:15:42.249+00:00",
+    "details": null,
+    "coordinator": [
+      "vitiosus aperte iste adeo tertius"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 59,
+    "poster": "https://meaty-monster.info",
+    "amount": 64,
+    "category": "TECHNICAL"
   },
   {
-    "id": "row_009",
-    "event_id": "evt_009",
-    "event_name": "BAND OF BRAHMA",
-    "venue": "MAIN STAGE",
-    "date": "2026-03-08",
-    "time": "08:00 PM",
-    "details": "College band showcase.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster9.png",
-    "event_pass": "pass_999"
+    "event_name": "Dr. Cary Labadie",
+    "venue": "conitor absconditus cornu creptio virtus",
+    "time": "currus",
+    "date": "2025-02-25T04:18:55.486+00:00",
+    "details": null,
+    "coordinator": [
+      "vis consequatur coaegresco",
+      "arma depraedor",
+      "combibo creo tandem speciosus",
+      "aedificium reprehenderit quasi aggredior caritas"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 85,
+    "poster": "https://darling-distinction.net/",
+    "amount": 19,
+    "category": "GENERAL"
   },
   {
-    "id": "row_010",
-    "event_id": "evt_010",
-    "event_name": "MIME",
-    "venue": "MAIN STAGE",
-    "date": "2026-03-07",
-    "time": "10:30 AM",
-    "details": "Non-verbal silent theatre performance.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster10.png",
-    "event_pass": "pass_010"
+    "event_name": "Trevor Crona",
+    "venue": "utilis eveniet",
+    "time": "caute",
+    "date": "2025-02-03T17:49:17.099+00:00",
+    "details": null,
+    "coordinator": [
+      "vapulus aurum credo"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 15,
+    "poster": "https://flustered-outlaw.org",
+    "amount": 38,
+    "category": "GENERAL"
   },
   {
-    "id": "row_011",
-    "event_id": "evt_011",
-    "event_name": "DOODLING",
-    "venue": "WELLNESS CLINIC",
-    "date": "2026-03-06",
-    "time": "11:00 AM",
-    "details": "Creative sketching and doodling competition.",
-    "coordinator": null,
-    "fest": "Brahma '26",
-    "poster": "https://link.to/poster11.png",
-    "event_pass": "pass_112"
+    "event_name": "Constance Lang",
+    "venue": "velum",
+    "time": "ratione aestas aestas suffoco",
+    "date": "2025-07-16T18:13:27.693+00:00",
+    "details": null,
+    "coordinator": [
+      "sol deprimo",
+      "cur ultra"
+    ],
+    "fest": "BRAHMA",
+    "slots": 16,
+    "poster": "https://lonely-spirit.org",
+    "amount": 47,
+    "category": "TECHNICAL"
+  },
+  {
+    "event_name": "Mr. Emanuel Huel",
+    "venue": "consequuntur ratione pauper delectatio",
+    "time": "sordeo strenuus",
+    "date": "2025-04-06T05:41:55.298+00:00",
+    "details": null,
+    "coordinator": [
+      "decet cavus testimonium"
+    ],
+    "fest": "BRAHMA",
+    "slots": 36,
+    "poster": "https://sneaky-membership.org",
+    "amount": 65,
+    "category": "TECHNICAL"
+  },
+  {
+    "event_name": "Kari Powlowski",
+    "venue": "cuius",
+    "time": "sollicito valeo valetudo coadunatio",
+    "date": "2025-04-28T18:57:59.632+00:00",
+    "details": null,
+    "coordinator": [
+      "centum xiphias volubilis",
+      "auditor defessus",
+      "adiuvo amoveo"
+    ],
+    "fest": "BRAHMA",
+    "slots": 9,
+    "poster": "https://gloomy-bookcase.com",
+    "amount": 73,
+    "category": "TECHNICAL"
+  },
+  {
+    "event_name": "Dr. Earnest Kling-Senger",
+    "venue": "accusamus cum cursus",
+    "time": "delectatio laborum voveo tonsor vae",
+    "date": "2025-01-17T08:06:47.813+00:00",
+    "details": null,
+    "coordinator": [
+      "repellendus"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 60,
+    "poster": "https://each-pecan.net/",
+    "amount": 34,
+    "category": "TECHNICAL"
+  },
+  {
+    "event_name": "Shawn Lynch",
+    "venue": "angelus deprecator",
+    "time": "cauda",
+    "date": "2025-12-11T06:30:12.993+00:00",
+    "details": null,
+    "coordinator": [
+      "creta comes",
+      "socius",
+      "absorbeo aiunt appositus turba illo",
+      "cuius curvo deficio vivo voluntarius",
+      "aliquid mollitia terror atrocitas teneo"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 19,
+    "poster": "https://that-range.net",
+    "amount": 21,
+    "category": "GENERAL"
+  },
+  {
+    "event_name": "Jack Murphy",
+    "venue": "claustrum totus",
+    "time": "tactus mollitia",
+    "date": "2025-11-28T13:36:14.191+00:00",
+    "details": null,
+    "coordinator": [
+      "coniuratio valetudo suggero modi"
+    ],
+    "fest": "BRAHMA",
+    "slots": 14,
+    "poster": "https://fine-slide.com",
+    "amount": 6,
+    "category": "TECHNICAL"
+  },
+  {
+    "event_name": "Belinda Boehm I",
+    "venue": "nesciunt",
+    "time": "aduro",
+    "date": "2025-06-13T02:56:02.678+00:00",
+    "details": null,
+    "coordinator": [
+      "ademptio comitatus repellat defetiscor",
+      "vinculum autus",
+      "volutabrum censura vero talus acervus"
+    ],
+    "fest": "BRAHMA",
+    "slots": 69,
+    "poster": "https://velvety-tributary.net",
+    "amount": 63,
+    "category": "TECHNICAL"
+  },
+  {
+    "event_name": "Codex",
+    "venue": "CCF LAB",
+    "time": "10:00am",
+    "date": "2026-01-30T14:41:27.933+00:00",
+    "details": null,
+    "coordinator": [
+      "Pavithra Deepu"
+    ],
+    "fest": "BRAHMA",
+    "slots": 45,
+    "poster": null,
+    "amount": 150,
+    "category": "TECHNICAL"
+  },
+  {
+    "event_name": "Sonia McLaughlin",
+    "venue": "appositus agnitio subvenio",
+    "time": "congregatio bonus vestrum textus delibero",
+    "date": "2025-01-03T20:18:35.386+00:00",
+    "details": null,
+    "coordinator": [
+      "viridis tondeo",
+      "carcer attonbitus damno",
+      "absens communis consequuntur sursum",
+      "cuius denuncio",
+      "umbra a adduco agnosco soleo"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 12,
+    "poster": "https://unique-wafer.info/",
+    "amount": 61,
+    "category": "GENERAL"
+  },
+  {
+    "event_name": "Raul Erdman-Bednar",
+    "venue": "titulus suus capio",
+    "time": "audentia calcar illo",
+    "date": "2025-06-23T05:01:16.691+00:00",
+    "details": null,
+    "coordinator": [
+      "sursum audax deleniti tracto volaticus",
+      "ullus cogito condico corrumpo",
+      "attonbitus placeat",
+      "canto addo voluntarius dignissimos tempus",
+      "paens omnis studio"
+    ],
+    "fest": "BRAHMA",
+    "slots": 76,
+    "poster": "https://infinite-castanet.org/",
+    "amount": 100,
+    "category": "TECHNICAL"
+  },
+  {
+    "event_name": "Dr. Maurice Stark",
+    "venue": "verbera utique ocer ducimus",
+    "time": "unde",
+    "date": "2025-02-22T10:51:59.838+00:00",
+    "details": null,
+    "coordinator": [
+      "tabernus similique cogito adipisci",
+      "quidem"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 43,
+    "poster": "https://posh-railway.name/",
+    "amount": 9,
+    "category": "GENERAL"
   }
 ]

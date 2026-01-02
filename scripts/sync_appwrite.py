@@ -10,7 +10,7 @@ APPWRITE_PROJECT_ID = os.getenv("APPWRITE_PROJECT_ID")
 APPWRITE_API_KEY = os.getenv("APPWRITE_API_KEY")
 
 # IMPORTANT: These are IDs, not names
-DATABASE_ID = "6948c95d00244f524a66"
+DATABASE_ID = "6948d5240015a19ea05a"
 COLLECTION_ID = "events"
 
 OUTPUT_FILE = "data/events.json"
@@ -34,20 +34,23 @@ def sync_events_from_appwrite():
 
     events = []
 
+    events = []
+
     for doc in documents:
         events.append({
-            "id": doc.get("$id"),
-            "event_id": doc.get("event_id"),
             "event_name": doc.get("event_name"),
             "venue": doc.get("venue"),
-            "date": doc.get("date"),
             "time": doc.get("time"),
+            "date": doc.get("date"),
             "details": doc.get("details"),
-            "coordinators": doc.get("coordinators"),
+            "coordinator": doc.get("coordinator"),
             "fest": doc.get("fest"),
+            "slots": doc.get("slots"),
             "poster": doc.get("poster"),
-            "event_pass": doc.get("event_pass")
+            "amount": doc.get("amount"),
+            "category": doc.get("category")
         })
+
 
     os.makedirs("data", exist_ok=True)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
