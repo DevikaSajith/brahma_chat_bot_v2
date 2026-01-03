@@ -1,353 +1,200 @@
 [
   {
-    "event_name": "Brian Hodkiewicz-Considine",
-    "venue": "demitto adhaero adamo abbas assumenda",
-    "time": "congregatio",
-    "date": "2025-03-08T05:33:23.624+00:00",
-    "details": null,
+    "event_name": "VR Experience",
+    "venue": "G-05",
+    "time": "9:30:00 AM",
+    "date": "2026-05-02T00:00:00.000+00:00",
+    "details": "The VR Gaming Zone is an interactive entertainment event where participants can experience Virtual Reality games using professionally rented VR headsets. Users can enter immersive virtual worlds and enjoy exciting games by paying a nominal usage fee.\nParticipants will be given time-based access to VR games, including action, adventure, and simulation experiences. Each session is supervised to ensure safe handling of equipment and smooth gameplay for all users.\nThis event is designed purely for fun, engagement, and exposure to VR technology, making it suitable for beginners and first-time VR users. The VR Gaming Zone offers a thrilling experience and a chance to explore next-generation gaming in a simple and affordable way.",
     "coordinator": [
-      "perspiciatis pauper succedo dedecor",
-      "aedificium peccatus",
-      "inflammatio",
-      "tabernus caput"
+      "Nandhu Sudheer",
+      "ASWIN P KURIAN"
     ],
-    "fest": "BRAHMA",
-    "slots": 59,
-    "poster": "https://stupendous-pearl.info",
-    "amount": 16,
+    "fest": "ASHWAMEDHA",
+    "slots": 3,
+    "poster": null,
+    "amount": "30",
     "category": "GENERAL"
   },
   {
-    "event_name": "Ms. Florence Rutherford",
-    "venue": "adulatio deludo",
-    "time": "cenaculum umerus annus",
-    "date": "2025-08-14T22:11:54.586+00:00",
-    "details": null,
+    "event_name": "Circuit Bombing",
+    "venue": "Circuits Lab",
+    "time": "9:30:00 AM",
+    "date": "2026-05-02T00:00:00.000+00:00",
+    "details": "Get ready to defuse the challenge in Circuit Bombing, an electrifying technical event at ASWAMEDHA 2026! ⚡\nTest your logic, speed, and circuit skills in intense, time-bound challenges where every connection counts. Analyze circuits, fix faults under pressure, and race against the clock to survive each round.\n\nThink smart, wire right, and win exciting prizes. Register now and prove your circuit mastery!",
     "coordinator": [
-      "addo conturbo",
-      "quis",
-      "cilicium illo caste"
+      "Adith K S",
+      "Antony Elvy P S",
+      "Geevarghese Benny",
+      "Nandana Satheesh"
     ],
     "fest": "ASHWAMEDHA",
-    "slots": 17,
-    "poster": "https://parallel-pharmacopoeia.net",
-    "amount": 85,
-    "category": "CULTURAL"
-  },
-  {
-    "event_name": "Geoffrey Kiehn",
-    "venue": "conspergo teres conduco creator",
-    "time": "terminatio spectaculum altus aeger",
-    "date": "2025-04-27T23:31:34.857+00:00",
-    "details": null,
-    "coordinator": [
-      "vae",
-      "canis aggero demergo"
-    ],
-    "fest": "ASHWAMEDHA",
-    "slots": 48,
-    "poster": "https://insidious-blossom.name",
-    "amount": 27,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Kate Schulist-Hodkiewicz",
-    "venue": "correptius",
-    "time": "vita",
-    "date": "2025-01-26T11:21:43.640+00:00",
-    "details": null,
-    "coordinator": [
-      "adipiscor cumque numquam taceo timidus",
-      "suggero",
-      "conicio desparatus vilitas",
-      "sopor inflammatio antea"
-    ],
-    "fest": "ASHWAMEDHA",
-    "slots": 14,
-    "poster": "https://flashy-daughter.biz",
-    "amount": 77,
-    "category": "CULTURAL"
-  },
-  {
-    "event_name": "Amy McCullough",
-    "venue": "acerbitas error",
-    "time": "valetudo aspernatur comes",
-    "date": "2025-01-20T23:33:17.058+00:00",
-    "details": null,
-    "coordinator": [
-      "atqui conitor celo",
-      "desino"
-    ],
-    "fest": "ASHWAMEDHA",
-    "slots": 1,
-    "poster": "https://caring-blight.org/",
-    "amount": 3,
-    "category": "CULTURAL"
-  },
-  {
-    "event_name": "Noah Dicki",
-    "venue": "ago magnam ratione despecto reiciendis",
-    "time": "sui corrupti volaticus aegrus",
-    "date": "2025-10-04T13:16:36.859+00:00",
-    "details": null,
-    "coordinator": [
-      "despecto stips aequus avaritia adnuo",
-      "super",
-      "beatus terreo virgo absque",
-      "odit vero creator avaritia",
-      "apto atqui"
-    ],
-    "fest": "ASHWAMEDHA",
-    "slots": 82,
-    "poster": "https://hasty-ceramic.org",
-    "amount": 91,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Ms. Jane Turner",
-    "venue": "sulum praesentium angulus despecto communis",
-    "time": "strues tersus totam",
-    "date": "2025-12-04T04:31:49.435+00:00",
-    "details": null,
-    "coordinator": [
-      "alioqui",
-      "subiungo cur"
-    ],
-    "fest": "BRAHMA",
-    "slots": 66,
-    "poster": "https://strident-swanling.info",
-    "amount": 63,
-    "category": "CULTURAL"
-  },
-  {
-    "event_name": "Mattie Ryan",
-    "venue": "temeritas conservo audax",
-    "time": "valetudo tamen",
-    "date": "2025-03-17T22:15:42.249+00:00",
-    "details": null,
-    "coordinator": [
-      "vitiosus aperte iste adeo tertius"
-    ],
-    "fest": "ASHWAMEDHA",
-    "slots": 59,
-    "poster": "https://meaty-monster.info",
-    "amount": 64,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Dr. Cary Labadie",
-    "venue": "conitor absconditus cornu creptio virtus",
-    "time": "currus",
-    "date": "2025-02-25T04:18:55.486+00:00",
-    "details": null,
-    "coordinator": [
-      "vis consequatur coaegresco",
-      "arma depraedor",
-      "combibo creo tandem speciosus",
-      "aedificium reprehenderit quasi aggredior caritas"
-    ],
-    "fest": "ASHWAMEDHA",
-    "slots": 85,
-    "poster": "https://darling-distinction.net/",
-    "amount": 19,
+    "slots": 20,
+    "poster": null,
+    "amount": "300/- per Team , 100/- per head",
     "category": "GENERAL"
   },
   {
-    "event_name": "Trevor Crona",
-    "venue": "utilis eveniet",
-    "time": "caute",
-    "date": "2025-02-03T17:49:17.099+00:00",
-    "details": null,
+    "event_name": "Sumo Wrestling",
+    "venue": "CCF parking lot",
+    "time": "10:30:00 AM",
+    "date": "2026-06-02T00:00:00.000+00:00",
+    "details": "Sumo Wrestling is a thrilling test of balance, strength, and strategy, inspired by the traditional Japanese sport. The competition takes place inside a circular ring, where two participants face off with a single objective: force the opponent out of the ring or make them touch the ground with any part of the body other than the feet.",
     "coordinator": [
-      "vapulus aurum credo"
+      "Gowtham C Benny",
+      "Mohammed Shafi"
     ],
-    "fest": "ASHWAMEDHA",
-    "slots": 15,
-    "poster": "https://flustered-outlaw.org",
-    "amount": 38,
+    "fest": "BRAHMA",
+    "slots": 40,
+    "poster": null,
+    "amount": "150",
     "category": "GENERAL"
   },
   {
-    "event_name": "Constance Lang",
-    "venue": "velum",
-    "time": "ratione aestas aestas suffoco",
-    "date": "2025-07-16T18:13:27.693+00:00",
-    "details": null,
+    "event_name": "Infinity castle",
+    "venue": "G07",
+    "time": "10:00:00 AM",
+    "date": "2026-05-02T00:00:00.000+00:00",
+    "details": "Infinity castle is an exhilarating technical event designed to test your skills, creativity, and problem-solving abilities. With four intense rounds  participants must complete technical tasks within strict  time limits to advance. Each round increases in difficulty, pushing you to think critically and perform under pressure. The event is a thrilling mix of competition and innovation, offering a platform to showcase your expertise. Are you ready to take on the challenge and emerge victorious",
     "coordinator": [
-      "sol deprimo",
-      "cur ultra"
+      "Alen Babu",
+      "Deljo Davis"
     ],
-    "fest": "BRAHMA",
-    "slots": 16,
-    "poster": "https://lonely-spirit.org",
-    "amount": 47,
-    "category": "TECHNICAL"
+    "fest": "ASHWAMEDHA",
+    "slots": 8,
+    "poster": null,
+    "amount": "100 per team",
+    "category": "GENERAL"
   },
   {
-    "event_name": "Mr. Emanuel Huel",
-    "venue": "consequuntur ratione pauper delectatio",
-    "time": "sordeo strenuus",
-    "date": "2025-04-06T05:41:55.298+00:00",
-    "details": null,
+    "event_name": "FPGA WORKSHOP",
+    "venue": "ECE SIMULATION LAB",
+    "time": "9:00:00 AM",
+    "date": "2026-05-02T00:00:00.000+00:00",
+    "details": "This workshop introduces the basics of FPGA technology, covering core digital components such as multiplexers, adders, and ALUs. Participants will learn fundamental FPGA concepts along with hands-on implementation of simple digital circuits. Ideal for beginners looking to gain practical experience in digital design.",
     "coordinator": [
-      "decet cavus testimonium"
-    ],
-    "fest": "BRAHMA",
-    "slots": 36,
-    "poster": "https://sneaky-membership.org",
-    "amount": 65,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Kari Powlowski",
-    "venue": "cuius",
-    "time": "sollicito valeo valetudo coadunatio",
-    "date": "2025-04-28T18:57:59.632+00:00",
-    "details": null,
-    "coordinator": [
-      "centum xiphias volubilis",
-      "auditor defessus",
-      "adiuvo amoveo"
-    ],
-    "fest": "BRAHMA",
-    "slots": 9,
-    "poster": "https://gloomy-bookcase.com",
-    "amount": 73,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Dr. Earnest Kling-Senger",
-    "venue": "accusamus cum cursus",
-    "time": "delectatio laborum voveo tonsor vae",
-    "date": "2025-01-17T08:06:47.813+00:00",
-    "details": null,
-    "coordinator": [
-      "repellendus"
+      "Sajid Krishna NM",
+      "Fibin Biju",
+      "Antony Samuel"
     ],
     "fest": "ASHWAMEDHA",
     "slots": 60,
-    "poster": "https://each-pecan.net/",
-    "amount": 34,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Shawn Lynch",
-    "venue": "angelus deprecator",
-    "time": "cauda",
-    "date": "2025-12-11T06:30:12.993+00:00",
-    "details": null,
-    "coordinator": [
-      "creta comes",
-      "socius",
-      "absorbeo aiunt appositus turba illo",
-      "cuius curvo deficio vivo voluntarius",
-      "aliquid mollitia terror atrocitas teneo"
-    ],
-    "fest": "ASHWAMEDHA",
-    "slots": 19,
-    "poster": "https://that-range.net",
-    "amount": 21,
-    "category": "GENERAL"
-  },
-  {
-    "event_name": "Jack Murphy",
-    "venue": "claustrum totus",
-    "time": "tactus mollitia",
-    "date": "2025-11-28T13:36:14.191+00:00",
-    "details": null,
-    "coordinator": [
-      "coniuratio valetudo suggero modi"
-    ],
-    "fest": "BRAHMA",
-    "slots": 14,
-    "poster": "https://fine-slide.com",
-    "amount": 6,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Belinda Boehm I",
-    "venue": "nesciunt",
-    "time": "aduro",
-    "date": "2025-06-13T02:56:02.678+00:00",
-    "details": null,
-    "coordinator": [
-      "ademptio comitatus repellat defetiscor",
-      "vinculum autus",
-      "volutabrum censura vero talus acervus"
-    ],
-    "fest": "BRAHMA",
-    "slots": 69,
-    "poster": "https://velvety-tributary.net",
-    "amount": 63,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Codex",
-    "venue": "CCF LAB",
-    "time": "10:00am",
-    "date": "2026-01-30T14:41:27.933+00:00",
-    "details": null,
-    "coordinator": [
-      "Pavithra Deepu"
-    ],
-    "fest": "BRAHMA",
-    "slots": 45,
     "poster": null,
-    "amount": 150,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Sonia McLaughlin",
-    "venue": "appositus agnitio subvenio",
-    "time": "congregatio bonus vestrum textus delibero",
-    "date": "2025-01-03T20:18:35.386+00:00",
-    "details": null,
-    "coordinator": [
-      "viridis tondeo",
-      "carcer attonbitus damno",
-      "absens communis consequuntur sursum",
-      "cuius denuncio",
-      "umbra a adduco agnosco soleo"
-    ],
-    "fest": "ASHWAMEDHA",
-    "slots": 12,
-    "poster": "https://unique-wafer.info/",
-    "amount": 61,
+    "amount": "100",
     "category": "GENERAL"
   },
   {
-    "event_name": "Raul Erdman-Bednar",
-    "venue": "titulus suus capio",
-    "time": "audentia calcar illo",
-    "date": "2025-06-23T05:01:16.691+00:00",
-    "details": null,
+    "event_name": "RekhaChitram - an interactive intro to digital design for beginners.",
+    "venue": "SI LAB",
+    "time": "1:30:00 PM",
+    "date": "2026-05-02T00:00:00.000+00:00",
+    "details": "Step into the world of digital design with this hands-on workshop crafted for beginners and curious creatives 🎨\nLearn the core principles of design—color, typography, spacing, and layout—while actively creating designs using Figma and Canva 💻\n\nFrom structured UI screens in Figma to quick, impactful visuals in Canva, this session shows how designers turn ideas into eye-catching designs across platforms ✨\nExpect real-time practice, creative exploration, and practical tips you can apply to projects, presentations, and social media 🚀",
     "coordinator": [
-      "sursum audax deleniti tracto volaticus",
-      "ullus cogito condico corrumpo",
-      "attonbitus placeat",
-      "canto addo voluntarius dignissimos tempus",
-      "paens omnis studio"
-    ],
-    "fest": "BRAHMA",
-    "slots": 76,
-    "poster": "https://infinite-castanet.org/",
-    "amount": 100,
-    "category": "TECHNICAL"
-  },
-  {
-    "event_name": "Dr. Maurice Stark",
-    "venue": "verbera utique ocer ducimus",
-    "time": "unde",
-    "date": "2025-02-22T10:51:59.838+00:00",
-    "details": null,
-    "coordinator": [
-      "tabernus similique cogito adipisci",
-      "quidem"
+      "Arpitha Bhandary",
+      "Ankita syam"
     ],
     "fest": "ASHWAMEDHA",
-    "slots": 43,
-    "poster": "https://posh-railway.name/",
-    "amount": 9,
+    "slots": 63,
+    "poster": null,
+    "amount": "Free",
+    "category": "GENERAL"
+  },
+  {
+    "event_name": "IOT based workshop by IEI",
+    "venue": "EC Simulation Lab",
+    "time": "9:00:00 AM",
+    "date": "2026-05-02T00:00:00.000+00:00",
+    "details": "IoT workshop by IEI is a hands-on training program where participants learn to build, connect, and program smart devices, exploring IoT concepts.",
+    "coordinator": [
+      "Joan Mariya Jesty",
+      "Noora Fathima",
+      "Jefna K J"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 50,
+    "poster": null,
+    "amount": "IEI MEMBERS -150   NON- IEI MEMBERS-200",
+    "category": "GENERAL"
+  },
+  {
+    "event_name": "Electrothon",
+    "venue": "Electronics workshop",
+    "time": "9:30:00 AM",
+    "date": "2026-05-02T00:00:00.000+00:00",
+    "details": "Competitive event where participants work intensively in teams over a set period to design, build, and present a functional solution to a predefined challenge or a real-world problem.",
+    "coordinator": [
+      "Abhinav Aji",
+      "Ahsan Roshan",
+      "C Prajwal P Kumar",
+      "Krishna B Nair"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 20,
+    "poster": null,
+    "amount": "300 per team",
+    "category": "GENERAL"
+  },
+  {
+    "event_name": "Strike 3",
+    "venue": "Basketball court",
+    "time": "10:30:00 AM",
+    "date": "2026-07-02T00:00:00.000+00:00",
+    "details": "Basketball",
+    "coordinator": [
+      "Surya Prakash T.S",
+      "Hridya poulose"
+    ],
+    "fest": "BRAHMA",
+    "slots": 15,
+    "poster": null,
+    "amount": "450",
+    "category": "GENERAL"
+  },
+  {
+    "event_name": "Fifa Fever",
+    "venue": "Microprocessor lab",
+    "time": "10:00:00 AM",
+    "date": "2026-07-02T00:00:00.000+00:00",
+    "details": "FIFA Fever is an exciting football-themed event conducted as part of the college tech fest, inspired by the global spirit of FIFA. The event brings together football enthusiasts to participate in engaging activities, games, and challenges that test their knowledge, skills, and passion for the sport. FIFA Fever aims to create a lively and competitive atmosphere while promoting teamwork, sportsmanship, and entertainment among participants.",
+    "coordinator": [
+      "Jyothish S Nair",
+      "Asvin Alias George"
+    ],
+    "fest": "BRAHMA",
+    "slots": 50,
+    "poster": null,
+    "amount": "120",
+    "category": "GENERAL"
+  },
+  {
+    "event_name": "Shootout Clash",
+    "venue": "S06",
+    "time": "9:00:00 AM",
+    "date": "2026-08-02T00:00:00.000+00:00",
+    "details": "Shootout: 3v3 \nIt all comes down to this 3v3 shootout. Game tied.\nThe pitch goes silent as the six players line up. There's no room for error; success hinges on absolute precision against the mini post.\nEach team fields three players, and every individual takes two high-pressure shots:\n\n⚽ Player 1: Two attempts.\n⚽ Player 2: Two attempts.\n⚽ Player 3: The final two shots for the win.\n\nSix shots total. Six moments that decide the champions. Thread the needle or go home. The pressure is immense. Who has the nerve to clinch the win?",
+    "coordinator": [
+      "Denil Davis",
+      "Jedhin Joy"
+    ],
+    "fest": "BRAHMA",
+    "slots": 60,
+    "poster": null,
+    "amount": "150",
+    "category": "GENERAL"
+  },
+  {
+    "event_name": "Turing Trails",
+    "venue": "MCA and SI Lab",
+    "time": "9:00:00 AM",
+    "date": "2026-04-02T00:00:00.000+00:00",
+    "details": "A technical treasure hunt using  programming language is an event where participants solve a series of coding  to find a final \"treasure",
+    "coordinator": [
+      "K Govindan Nampoothiri",
+      "Amal Binu"
+    ],
+    "fest": "ASHWAMEDHA",
+    "slots": 20,
+    "poster": null,
+    "amount": "300",
     "category": "GENERAL"
   }
 ]
