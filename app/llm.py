@@ -24,13 +24,22 @@ def generate_answer(context: str, question: str) -> str:
     if len(context) > max_context_length:
         context = context[:max_context_length] + "..."
     
-    # Simplified prompt for faster generation
-    prompt = f"""Answer briefly about Brahma '26 festival at ASIET using only this context:
+    # Strict prompt to prevent hallucination
+    prompt = f"""You are an assistant for Brahma '26 and Ashwamedha '26 festivals at ASIET.
 
+CRITICAL RULES:
+1. ONLY use information from the context below
+2. If the answer is NOT in the context, say "I don't have that information"
+3. DO NOT make up or guess any information
+4. DO NOT add details not present in the context
+5. Keep answers brief and factual
+
+Context:
 {context}
 
-Q: {question}
-A:"""
+Question: {question}
+
+Answer (only from context above):"""
 
     try:
         print("🔄 Sending request to LLM...")
@@ -40,7 +49,7 @@ A:"""
             contents=prompt,
             config={
                 'max_output_tokens': 150,  # Reduced for faster response
-                'temperature': 0.4,  # Slightly higher for faster generation
+                'temperature': 0.2,  # Lower temperature to reduce creativity/hallucination
             }
         )
         return response.text
