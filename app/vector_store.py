@@ -82,16 +82,35 @@ def build_vector_store(events):
     events_to_process = events[:MAX_CACHE_SIZE] if len(events) > MAX_CACHE_SIZE else events
 
     # Event documents - keep text concise
-    for event in events_to_process:
+    for idx, event in enumerate(events_to_process):
+        # Skip None/invalid events
+        if event is None or not isinstance(event, dict):
+            continue
+        
+        # Skip events without required fields
+        if 'event_name' not in event:
+            print(f"⚠️ Skipping event with missing event_name: {event}")
+            continue
+        
+        # Generate event_id if not present (use sanitized event_name or index)
+        if 'event_id' not in event:
+            # Create a simple ID from event name or use index
+            event_id = event['event_name'].replace(' ', '_').replace('-', '_').lower()[:50] + f"_{idx}"
+        else:
+            event_id = event["event_id"]
+            
         # Shorter text representation to save memory
-        text = f"{event['event_name']}. {event.get('details', '')[:200]}"  # Truncate details
+        # Handle None details properly
+        details = event.get('details') or ''
+        details_truncated = details[:200] if details else ''
+        text = f"{event['event_name']}. {details_truncated}"
         documents.append(text)
         metadatas.append({
             "type": "event",
-            "event_id": event["event_id"],
+            "event_id": event_id,
             "event_name": event["event_name"]
         })
-        ids.append(event["event_id"])
+        ids.append(event_id)
 
     # Fest documents (optional, only if file exists)
     if os.path.exists(FEST_DOC_PATH):
@@ -114,6 +133,11 @@ def build_vector_store(events):
             print(f"⚠️ Error loading fest documents: {e}")
             import traceback
             traceback.print_exc()
+
+    # Check if we have any documents to process
+    if not documents:
+        print("⚠️ No valid documents found to add to vector store")
+        return
 
     # Process in small batches
     batch_size = MAX_BATCH_SIZE
