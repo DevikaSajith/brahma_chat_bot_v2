@@ -73,3 +73,7 @@ PyYAML>=6.0
 python-dateutil>=2.8
 lxml>=4.9
 pillow>=10.2
+#-------------------
+firebase
+#--------------------------
+pip install firebase-admin
