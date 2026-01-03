@@ -543,8 +543,9 @@ def is_registration_query(query: str) -> bool:
     
     return any(keyword in q_lower for keyword in registration_keywords)
 def format_event_list(title: str, events: list[str]) -> str:
+    """Format event list with proper header and bullet points"""
     event_lines = "\n".join(f"• {e}" for e in events)
-    return f"{title}\n\n{event_lines}"
+    return f"Here's the event list for {title}:\n\n{event_lines}"
 
 
 def is_goodbye(query: str) -> bool:
@@ -656,14 +657,23 @@ def is_event_list_query(query: str) -> bool:
     # Keywords that indicate user wants a list
     list_keywords = [
         "list of events",
+        "list events",
         "all events",
         "what are the events",
+        "what are events",
         "which events",
         "show events",
+        "show me events",
         "tell me events",
+        "tell me the events",
         "events in",
         "what events",
-        "list events"
+        "give me events",
+        "get events",
+        "events list",
+        "list all events",
+        "show all events",
+        "what all events"
     ]
     
     return any(keyword in q for keyword in list_keywords)
@@ -708,29 +718,38 @@ def chat(user_message: str) -> str:
             if fest == "brahma":
                 if is_general:
                     return format_event_list(
-                        "🎯 Brahma '26 – General Events",
+                        "Brahma '26 – General Events",
                         BRAHMA_GENERAL_EVENTS
                     )
                 elif is_cultural:
                     return format_event_list(
-                        "🎭 Brahma '26 – Cultural Events",
+                        "Brahma '26 – Cultural Events",
                         BRAHMA_CULTURAL_EVENTS
                     )
                 elif is_technical:
                     return format_event_list(
-                        "⚙️ Brahma '26 – Technical Events",
+                        "Brahma '26 – Technical Events",
                         BRAHMA_TECHNICAL_EVENTS
                     )
                 else:
                     # All Brahma events
                     all_events = BRAHMA_GENERAL_EVENTS + BRAHMA_CULTURAL_EVENTS + BRAHMA_TECHNICAL_EVENTS
-                    return format_event_list("🎉 All Brahma '26 Events", all_events)
+                    return format_event_list("Brahma '26 – All Events", all_events)
 
             elif fest == "ashwamedha":
                 return format_event_list(
-                    "⚙️ Ashwamedha '26 – Technical Events",
+                    "Ashwamedha '26 – Technical Events",
                     ASHWAMEDHA_TECHNICAL_EVENTS
                 )
+            
+            # If no fest detected but user asked for events, try to infer or show all
+            else:
+                # Show both festival events if no specific fest mentioned
+                all_events = (
+                    [f"🎉 BRAHMA '26 EVENTS:"] + BRAHMA_GENERAL_EVENTS + BRAHMA_CULTURAL_EVENTS + BRAHMA_TECHNICAL_EVENTS +
+                    ["", "⚙️ ASHWAMEDHA '26 EVENTS:"] + ASHWAMEDHA_TECHNICAL_EVENTS
+                )
+                return format_event_list("ASIET Festivals", all_events)
         
         # 4. REGISTRATION: Important action queries
         if is_registration_query(query):
@@ -838,7 +857,7 @@ def format_event_response(event: dict, query: str = "") -> str:
     asking_fest = any(word in q_lower for word in ["fest", "festival", "occasion"])
     asking_slots = any(word in q_lower for word in ["slots", "seats", "vacancy", "available", "limit"])
     asking_poster = any(word in q_lower for word in ["poster", "image", "picture", "flyer"])
-    asking_amount = any(word in q_lower for word in ["amount", "price", "fee", "cost", "registration", "charge"])
+    asking_amount = any(word in q_lower for word in ["amount", "price", "fee", "cost", "registration", "charge", "money", "pay", "payment", "paid", "rates", "pricing", "charges", "how much"])
     asking_category = any(word in q_lower for word in ["category", "type", "kind", "genre"])
     
     # Count how many aspects are being asked
@@ -887,7 +906,10 @@ def format_event_response(event: dict, query: str = "") -> str:
         return random.choice([
             f"The registration fee for {name} is {amount}.",
             f"It costs {amount} to participate in {name}.",
-            f"The amount for {name} is {amount}."
+            f"The amount for {name} is {amount}.",
+            f"{name} costs {amount}.",
+            f"You'll need to pay {amount} for {name}.",
+            f"The entry fee is {amount}."
         ])
 
     # If only asking about slots
@@ -991,7 +1013,10 @@ def format_event_response(event: dict, query: str = "") -> str:
         return random.choice([
             f"{name} starts at {time} with a registration fee of {amount}.",
             f"The event is at {time} and costs {amount} to register.",
-            f"{name} begins at {time}. Fee: {amount}."
+            f"{name} begins at {time}. Fee: {amount}.",
+            f"It's scheduled for {time} and the fee is {amount}.",
+            f"{name} happens at {time}. You'll need to pay {amount}.",
+            f"The event starts at {time} with an entry fee of {amount}."
         ])
 
     if asking_time and asking_category and aspects_count == 2:
@@ -1063,7 +1088,10 @@ def format_event_response(event: dict, query: str = "") -> str:
         return random.choice([
             f"{name} is on {date} with a registration fee of {amount}.",
             f"The event is on {date} and costs {amount}.",
-            f"{name} happens on {date}. Fee: {amount}."
+            f"{name} happens on {date}. Fee: {amount}.",
+            f"It's scheduled for {date}. The fee is {amount}.",
+            f"On {date}, {name} will take place with an entry fee of {amount}.",
+            f"Mark {date}! Registration costs {amount}."
         ])
 
     if asking_date and asking_category and aspects_count == 2:
@@ -1122,7 +1150,9 @@ def format_event_response(event: dict, query: str = "") -> str:
                 f"{name} has a registration fee of {amount}. Coordinator: {coordinator}.",
                 f"The fee is {amount}. Contact {coordinator} for {name}.",
                 f"{coordinator} are coordinating {name}, which costs {amount}.",
-                f"{name} - Fee: {amount}. Reach out to {coordinator}."
+                f"{name} - Fee: {amount}. Reach out to {coordinator}.",
+                f"It costs {amount}. You can contact {coordinator} for more details.",
+                f"{coordinator} are organizing {name}. The registration fee is {amount}."
             ])
         return f"{name} costs {amount}, but coordinator details are not available."
 
@@ -1165,7 +1195,10 @@ def format_event_response(event: dict, query: str = "") -> str:
         return random.choice([
             f"{name} will be held at {venue} with a registration fee of {amount}.",
             f"The venue is {venue} and the fee is {amount}.",
-            f"{name} is at {venue}. Fee: {amount}."
+            f"{name} is at {venue}. Fee: {amount}.",
+            f"It's happening at {venue}. The cost is {amount}.",
+            f"{name} takes place at {venue} with an entry fee of {amount}.",
+            f"You can attend {name} at {venue} for {amount}."
         ])
 
     if asking_venue and asking_category and aspects_count == 2:
@@ -1203,7 +1236,10 @@ def format_event_response(event: dict, query: str = "") -> str:
         return random.choice([
             f"{name} is part of {fest} with a registration fee of {amount}.",
             f"This {fest} event costs {amount}.",
-            f"{name} ({fest}) - Fee: {amount}."
+            f"{name} ({fest}) - Fee: {amount}.",
+            f"It's a {fest} event with an entry fee of {amount}.",
+            f"{name} happens during {fest}. The fee is {amount}.",
+            f"You can participate in {name} at {fest} for {amount}."
         ])
 
     if asking_fest and asking_category and aspects_count == 2:
@@ -1234,7 +1270,10 @@ def format_event_response(event: dict, query: str = "") -> str:
         return random.choice([
             f"{name} has {slots} slots with a registration fee of {amount}.",
             f"There are {slots} seats available for {amount}.",
-            f"{name} - Fee: {amount}, Slots: {slots}."
+            f"{name} - Fee: {amount}, Slots: {slots}.",
+            f"It costs {amount} and has {slots} slots available.",
+            f"{name} has {slots} spots left. The entry fee is {amount}.",
+            f"Registration is {amount} with {slots} seats remaining."
         ])
 
     if asking_slots and asking_category and aspects_count == 2:
@@ -1257,7 +1296,10 @@ def format_event_response(event: dict, query: str = "") -> str:
             return random.choice([
                 f"{name} costs {amount}. Poster: {poster}",
                 f"Registration fee: {amount}. Check poster: {poster}",
-                f"{name} - Fee: {amount}. View poster: {poster}"
+                f"{name} - Fee: {amount}. View poster: {poster}",
+                f"The entry fee is {amount}. View the poster here: {poster}",
+                f"It's {amount} to register. Check out the poster: {poster}",
+                f"{name} has a fee of {amount}. Poster available at: {poster}"
             ])
         return f"{name} costs {amount}, but the poster is not available."
 
@@ -1284,14 +1326,20 @@ def format_event_response(event: dict, query: str = "") -> str:
         return random.choice([
             f"{name} is a {category} event with a registration fee of {amount}.",
             f"This {category} event costs {amount}.",
-            f"{name} ({category}) - Fee: {amount}."
+            f"{name} ({category}) - Fee: {amount}.",
+            f"It's a {category} event. The fee is {amount}.",
+            f"{name} falls under {category} and costs {amount}.",
+            f"This {category} event has an entry fee of {amount}."
         ])
 
     if asking_amount and asking_what and aspects_count == 2 and details:
         return random.choice([
             f"{name} costs {amount}. {details}",
             f"Registration fee: {amount}. {details}",
-            f"{name} - Fee: {amount}. {details}"
+            f"{name} - Fee: {amount}. {details}",
+            f"The entry fee is {amount}. {details}",
+            f"{details} It costs {amount} to participate.",
+            f"{name} has a fee of {amount}. {details}"
         ])
 
     # Category combinations
