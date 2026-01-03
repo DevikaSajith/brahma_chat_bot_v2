@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+from datetime import datetime
 from dotenv import load_dotenv
 from firestore_fallback import fetch_events_from_firestore
 
@@ -34,11 +35,24 @@ def fetch_from_appwrite():
 
     events = []
     for doc in documents:
+        # Convert date from ISO format to DD/MM/YYYY
+        raw_date = doc.get("date")
+        formatted_date = raw_date
+        if raw_date:
+            try:
+                # Parse ISO 8601 format: "2026-06-02T00:00:00.000+00:00"
+                dt = datetime.fromisoformat(raw_date.replace('Z', '+00:00'))
+                # Convert to DD/MM/YYYY
+                formatted_date = dt.strftime("%d/%m/%Y")
+            except Exception as e:
+                print(f"⚠️ Could not parse date '{raw_date}': {e}")
+                formatted_date = raw_date  # Keep original if parsing fails
+        
         events.append({
             "event_name": doc.get("event_name"),
             "venue": doc.get("venue"),
             "time": doc.get("time"),
-            "date": doc.get("date"),
+            "date": formatted_date,
             "details": doc.get("details"),
             "coordinator": doc.get("coordinator"),
             "fest": doc.get("fest"),

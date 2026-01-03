@@ -57,6 +57,7 @@ requests>=2.31
 tqdm>=4.66
 regex>=2023.12
 python-dotenv>=1.0
+psutil>=5.9
 
 # -------------------------
 # Security / Auth
