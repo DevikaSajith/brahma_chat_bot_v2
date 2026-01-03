@@ -6,6 +6,15 @@ import random
 from difflib import SequenceMatcher
 import gc
 
+# Import analytics from main (will be set at runtime)
+def get_analytics():
+    """Get analytics dict from main module if available"""
+    try:
+        from app import main
+        return main.ANALYTICS
+    except (ImportError, AttributeError):
+        return None
+
 # ---------------- CONFIG ---------------- #
 
 # Response variations
@@ -335,56 +344,57 @@ def fuzzy_fest_match(query: str, threshold: float = 0.72):
     return None
 
 def find_exact_event(query: str):
-    """Find event with simplified matching, handles space/hyphen variations"""
+    """Find event with simplified matching, handles typos"""
     q_tokens = tokenize(query)
-    q_normalized = normalize_text(query)
     q_lower = query.lower().strip()
     matched = []
 
     # Search through all cached events
     for event in EVENT_CACHE:
         name = event.get("event_name", "")
+        if not name:
+            continue
+            
         name_lower = name.lower().strip()
         e_tokens = tokenize(name)
-        e_normalized = normalize_text(name)
 
-        # Exact match (case insensitive)
-        if name_lower == q_lower:
-            return event
-        
-        # Token-based match (all event words in query)
+        # 1. Exact substring match (highest priority)
+        if name_lower in q_lower:
+            matched.append(event)
+            continue
+
+        # 2. Token-based match (all event name words in query)
         if e_tokens and e_tokens.issubset(q_tokens):
             matched.append(event)
             continue
         
-        # Check if event name appears in query (case insensitive)
-        if len(name_lower) > 3 and name_lower in q_lower:
-            matched.append(event)
-            continue
-        
-        # Normalized match - more flexible for "infinity castle" type queries
-        if len(e_normalized) > 3 and e_normalized in q_normalized:
-            # Accept if normalized match is substantial
-            length_ratio = len(e_normalized) / len(q_normalized) if q_normalized else 0
-            if length_ratio > 0.5 or e_normalized == q_normalized:
+        # 3. Fuzzy token match (handles typos like "inifinity" -> "infinity")
+        if e_tokens and len(e_tokens) >= 2:
+            fuzzy_matches = 0
+            for e_word in e_tokens:
+                if len(e_word) < 4:  # Skip short words
+                    continue
+                for q_word in q_tokens:
+                    if len(q_word) < 4:
+                        continue
+                    if similarity(e_word, q_word) > 0.85:
+                        fuzzy_matches += 1
+                        break
+            # If most event words have fuzzy matches
+            if fuzzy_matches >= len([w for w in e_tokens if len(w) >= 4]):
                 matched.append(event)
                 continue
-        
-        # Fuzzy similarity match for close names
-        if len(name) > 5 and similarity(name_lower, q_lower) > 0.8:
-            matched.append(event)
 
     if len(matched) == 1:
         return matched[0]
     
-    # If multiple matches, try to find the best one
+    # If multiple matches, prefer exact substring
     if len(matched) > 1:
-        # Prefer exact substring matches
         for event in matched:
             name_lower = event.get("event_name", "").lower()
-            if name_lower in q_lower or q_lower in name_lower:
+            if name_lower in q_lower:
                 return event
-        # Return the first match
+        # Return first match
         return matched[0]
     
     return None
@@ -665,6 +675,8 @@ def chat(user_message: str) -> str:
     Lightweight chat function with memory optimization.
     PRIORITY ORDER: Security → Events → Registration → Info → Pleasantries
     """
+    analytics = get_analytics()
+    
     try:
         query = user_message.strip()
         if not query:
@@ -672,17 +684,25 @@ def chat(user_message: str) -> str:
 
         # 1. SECURITY: Handle meta questions and abuse first
         if is_meta_question(query):
+            if analytics:
+                analytics["pattern_matches"]["meta_question"] += 1
             return "I'm here specifically to help with Brahma '26 and Ashwamedha '26 event-related queries."
         if is_abusive_query(query):
+            if analytics:
+                analytics["pattern_matches"]["abuse"] += 1
             return random.choice(ABUSE_RESPONSES)
         
         # 2. PRIMARY PURPOSE: Event matching (highest priority for event bot!)
         event = find_exact_event(query)
         if event:
+            if analytics:
+                analytics["event_matches"] += 1
             return format_event_response(event, query)
         
         # 3. EVENT LISTS: Check if user wants list of events
         if is_event_list_query(query):
+            if analytics:
+                analytics["pattern_matches"]["event_list"] += 1
             fest, is_general, is_cultural, is_technical = detect_event_category(query)
 
             if fest == "brahma":
@@ -714,11 +734,15 @@ def chat(user_message: str) -> str:
         
         # 4. REGISTRATION: Important action queries
         if is_registration_query(query):
+            if analytics:
+                analytics["pattern_matches"]["registration"] += 1
             return random.choice(REGISTRATION_RESPONSES)
         
         # 5. FEST INFO: Simple "what is brahma/ashwamedha" queries
         fest = fuzzy_fest_match(query)
         if fest and is_simple_fest_query(query):
+            if analytics:
+                analytics["pattern_matches"]["fest_info"] += 1
             if fest == "brahma":
                 return random.choice(BRAHMA_RESPONSES)
             if fest == "ashwamedha":
@@ -726,25 +750,38 @@ def chat(user_message: str) -> str:
         
         # 6. PLEASANTRIES: Handle conversational elements (lower priority)
         if is_greeting(query):
+            if analytics:
+                analytics["pattern_matches"]["greeting"] += 1
             return random.choice(GREETING_RESPONSES)
         
         if is_thankyou(query):
+            if analytics:
+                analytics["pattern_matches"]["thankyou"] += 1
             return random.choice(THANKYOU_RESPONSES)
         
         if is_bye(query):
+            if analytics:
+                analytics["pattern_matches"]["bye"] += 1
             return random.choice(BYE_RESPONSES)
         
         if is_okay(query):
+            if analytics:
+                analytics["pattern_matches"]["okay"] += 1
             return random.choice(OKAY_RESPONSES)
 
         # 7. RELEVANCE CHECK: Early exit for irrelevant queries
         if not is_relevant_query(query):
+            if analytics:
+                analytics["pattern_matches"]["out_of_context"] += 1
             return random.choice(OUT_OF_CONTEXT_RESPONSES)
 
         # 8. SEMANTIC SEARCH: Deep search for complex queries
 
         # Semantic search (more expensive)
         try:
+            if analytics:
+                analytics["semantic_search_calls"] += 1
+            
             results = semantic_search(query, top_k=2)  # Reduced to 2
             
             if not results:
@@ -759,6 +796,8 @@ def chat(user_message: str) -> str:
             context = "\n".join(context_parts)
             
             # Generate answer
+            if analytics:
+                analytics["llm_calls"] += 1
             answer = generate_answer(context, query)
             
             # Cleanup
