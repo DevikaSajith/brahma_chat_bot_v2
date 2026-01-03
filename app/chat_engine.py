@@ -618,6 +618,13 @@ def chat(user_message: str) -> str:
         if is_bye(query):
             return random.choice(BYE_RESPONSES)
         # Handle meta / personal bot questions
+        # Quick fest detection - but only for simple queries
+        fest = fuzzy_fest_match(query)
+        if fest and is_simple_fest_query(query):
+            if fest == "brahma":
+                return random.choice(BRAHMA_RESPONSES)
+            if fest == "ashwamedha":
+                return random.choice(ASHWAMEDHA_RESPONSES)
         
 
         #handle okee
@@ -686,6 +693,7 @@ def chat(user_message: str) -> str:
             
             # Generate answer
             answer = generate_answer(context, query)
+            print("this is llm")
             
             # Cleanup
             gc.collect()

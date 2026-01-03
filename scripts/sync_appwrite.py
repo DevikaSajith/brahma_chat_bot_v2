@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
+from firestore_fallback import fetch_events_from_firestore
 
 load_dotenv()
 
@@ -9,7 +10,6 @@ APPWRITE_ENDPOINT = os.getenv("APPWRITE_ENDPOINT")
 APPWRITE_PROJECT_ID = os.getenv("APPWRITE_PROJECT_ID")
 APPWRITE_API_KEY = os.getenv("APPWRITE_API_KEY")
 
-# IMPORTANT: These are IDs, not names
 DATABASE_ID = "6948d5240015a19ea05a"
 COLLECTION_ID = "events"
 
@@ -23,19 +23,16 @@ HEADERS = {
 }
 
 
-def sync_events_from_appwrite():
+def fetch_from_appwrite():
     print("Fetching events from Appwrite (REST API)...")
 
-    response = requests.get(URL, headers=HEADERS)
+    response = requests.get(URL, headers=HEADERS, timeout=10)
     response.raise_for_status()
 
     data = response.json()
     documents = data.get("documents", [])
 
     events = []
-
-    events = []
-
     for doc in documents:
         events.append({
             "event_name": doc.get("event_name"),
@@ -51,13 +48,28 @@ def sync_events_from_appwrite():
             "category": doc.get("category")
         })
 
+    return events
+
+
+def sync_events():
+    try:
+        events = fetch_from_appwrite()
+        if not events:
+            raise ValueError("No events returned from Appwrite")
+
+        source = "Appwrite"
+
+    except Exception as e:
+        print(f"❌ Appwrite failed: {e}")
+        events = fetch_events_from_firestore()
+        source = "Firestore"
 
     os.makedirs("data", exist_ok=True)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(events, f, indent=2, ensure_ascii=False)
 
-    print(f"✅ Synced {len(events)} events into {OUTPUT_FILE}")
+    print(f"✅ Synced {len(events)} events from {source} into {OUTPUT_FILE}")
 
 
 if __name__ == "__main__":
-    sync_events_from_appwrite()
+    sync_events()

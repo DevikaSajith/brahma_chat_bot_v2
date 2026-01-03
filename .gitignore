@@ -29,3 +29,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Firebase credentials
+firebase_service_account.json
+secrets/
