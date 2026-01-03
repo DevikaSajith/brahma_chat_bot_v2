@@ -33,6 +33,8 @@ Q: {question}
 A:"""
 
     try:
+        print("🔄 Sending request to LLM...")
+        print(f"context: {context}, question: {question}")
         response = client.models.generate_content(
             model=model,
             contents=prompt,

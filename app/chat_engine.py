@@ -236,13 +236,18 @@ def tokenize(text: str) -> set:
     return set(re.findall(r"\b[a-zA-Z]+\b", text.lower()))
 def is_abusive_query(query: str) -> bool:
     q = query.lower().strip()
+    words = set(re.findall(r"\b[a-zA-Z]+\b", q))
 
-    abusive_keywords = [
+    # Short words need whole-word matching to avoid false positives
+    short_abusive = ["mad", "bad", "dumb"]
+    if any(word in words for word in short_abusive):
+        return True
+    
+    # Longer phrases can use substring matching
+    abusive_phrases = [
         "stupid",
         "idiot",
-        "dumb",
         "useless",
-        "mad",
         "crazy",
         "are you stupid",
         "are you dumb",
@@ -252,11 +257,11 @@ def is_abusive_query(query: str) -> bool:
         "worst bot",
         "nonsense bot",
         "hello bitch",
-        "hello stupid monkey bot"
+        "hello stupid monkey bot",
         "shut up"
     ]
 
-    return any(word in q for word in abusive_keywords)
+    return any(phrase in q for phrase in abusive_phrases)
 
 
 def is_meta_question(query: str) -> bool:
@@ -333,26 +338,53 @@ def find_exact_event(query: str):
     """Find event with simplified matching, handles space/hyphen variations"""
     q_tokens = tokenize(query)
     q_normalized = normalize_text(query)
+    q_lower = query.lower().strip()
     matched = []
 
-    # Limit search to cached events
-    for event in EVENT_CACHE[:50]:  # Check only first 50
+    # Search through all cached events
+    for event in EVENT_CACHE:
         name = event.get("event_name", "")
+        name_lower = name.lower().strip()
         e_tokens = tokenize(name)
         e_normalized = normalize_text(name)
 
+        # Exact match (case insensitive)
+        if name_lower == q_lower:
+            return event
+        
         # Token-based match (all event words in query)
         if e_tokens and e_tokens.issubset(q_tokens):
             matched.append(event)
-        # Normalized match - but only if lengths are similar (prevents "brma" matching "bandofbrahma")
-        elif len(e_normalized) > 3 and e_normalized in q_normalized:
-            # Only match if the normalized event name is a substantial part of the query
-            # or if they're similar in length (to prevent partial substring false matches)
+            continue
+        
+        # Check if event name appears in query (case insensitive)
+        if len(name_lower) > 3 and name_lower in q_lower:
+            matched.append(event)
+            continue
+        
+        # Normalized match - more flexible for "infinity castle" type queries
+        if len(e_normalized) > 3 and e_normalized in q_normalized:
+            # Accept if normalized match is substantial
             length_ratio = len(e_normalized) / len(q_normalized) if q_normalized else 0
-            if length_ratio > 0.6 or e_normalized == q_normalized:
+            if length_ratio > 0.5 or e_normalized == q_normalized:
                 matched.append(event)
+                continue
+        
+        # Fuzzy similarity match for close names
+        if len(name) > 5 and similarity(name_lower, q_lower) > 0.8:
+            matched.append(event)
 
     if len(matched) == 1:
+        return matched[0]
+    
+    # If multiple matches, try to find the best one
+    if len(matched) > 1:
+        # Prefer exact substring matches
+        for event in matched:
+            name_lower = event.get("event_name", "").lower()
+            if name_lower in q_lower or q_lower in name_lower:
+                return event
+        # Return the first match
         return matched[0]
     
     return None
@@ -365,7 +397,7 @@ def is_greeting(query: str) -> bool:
 
     greeting_words = {
         "hi", "hello", "hey", "hai", "hii", "heyy",
-        "hola", "greetings", "yo","help","helpp"
+        "hola", "greetings", "yo", "help", "helpp"
     }
 
     filler_words = {
@@ -377,15 +409,25 @@ def is_greeting(query: str) -> bool:
 
     # Remove fillers
     meaningful = [w for w in words if w not in filler_words]
+    
+    # For single-word queries, use exact match (prevents "helpful" from matching "help")
+    if len(meaningful) == 1:
+        if meaningful[0] in greeting_words:
+            return True
+        # Fuzzy match for typos
+        for g in greeting_words:
+            if len(meaningful[0]) >= 3 and similarity(meaningful[0], g) >= 0.75:
+                return True
+        return False
 
-    # Exact greeting match
+    # For multi-word queries, exact greeting match
     if any(w in greeting_words for w in meaningful):
         return True
 
     # Fuzzy greeting match (handles helo, hllo, helloo)
     for w in meaningful:
         for g in greeting_words:
-            if similarity(w, g) >= 0.75:
+            if len(w) >= 3 and similarity(w, g) >= 0.75:
                 return True
 
     return False
@@ -397,22 +439,26 @@ def is_thankyou(query: str) -> bool:
     # Normalize repeated letters: thanksss -> thankss
     q_norm = re.sub(r"(.)\1{2,}", r"\1\1", q_lower)
 
-    # Common thank-you variants
-    thank_words = [
-        "thanks", "thank you", "thankyou", "thx", "ty", "appreciate"
-    ]
-
-    # Direct phrase match
-    for phrase in thank_words:
+    # Extract words for whole-word matching
+    words = set(re.findall(r"\b[a-zA-Z]+\b", q_norm))
+    
+    # Short thank-you words need exact word match (to avoid "infinity" matching "ty")
+    short_thanks = ["ty", "thx"]
+    if any(word in words for word in short_thanks):
+        return True
+    
+    # Longer phrases can use substring match
+    long_thanks = ["thanks", "thank you", "thankyou", "appreciate"]
+    for phrase in long_thanks:
         if phrase in q_norm:
             return True
 
-    # Fuzzy word-level match for spelling mistakes
-    words = re.findall(r"\b[a-zA-Z]+\b", q_norm)
+    # Fuzzy word-level match for spelling mistakes (only for longer words)
     for w in words:
-        for t in ["thanks", "thank"]:
-            if similarity(w, t) >= 0.7:
-                return True
+        if len(w) >= 5:  # Only check words 5+ characters to avoid false matches
+            for t in ["thanks", "thank"]:
+                if similarity(w, t) >= 0.7:
+                    return True
 
     return False
 
@@ -421,38 +467,39 @@ def is_bye(query: str) -> bool:
 
     # Normalize repeated characters: byeee → byee → bye
     q_norm = re.sub(r"(.)\1{2,}", r"\1\1", q_lower)
+    
+    # Extract words for whole-word matching
+    words = set(re.findall(r"\b[a-zA-Z]+\b", q_norm))
 
-    # Common bye phrases
+    # Short words that need exact word match (to avoid "no" matching "know", "innovation", etc.)
+    short_byes = ["no", "bye", "tata", "later", "cya", "exit", "quit", "close"]
+    if any(word in words for word in short_byes):
+        return True
+    
+    # Longer phrases can use substring matching
     bye_phrases = [
-        "bye", "bye bye", "byebye", "goodbye", "good bye",
-        "see you", "see ya", "cya",
-        "tata", "ta ta", "later",
-        "exit", "quit", "close", "sign off", "signoff","no","noo"
+        "bye bye", "byebye", "goodbye", "good bye",
+        "see you", "see ya",
+        "ta ta",
+        "sign off", "signoff"
     ]
 
     # Phrase match (for multi-word goodbyes)
-    for phrase in bye_phrases:
-        if phrase in q_norm:
-            return True
-
-    # Word-level fallback (safe) - but make sure these are complete words
-    words = set(re.findall(r"\b[a-zA-Z]+\b", q_norm))
-    # Only match if EXACT word match, not substring
-    return bool(words & {"bye", "goodbye", "tata", "later", "cya"})  # Removed "cu"
+    return any(phrase in q_norm for phrase in bye_phrases)
 
 
 
 def is_okay(query: str) -> bool:
     """Check if message is a variation of 'ok' using flexible pattern matching"""
     q_lower = query.lower().strip()
+    words = set(re.findall(r"\b[a-zA-Z]+\b", q_lower))
     
-    # Matches patterns like: ok, okay, okee, okeyy, okyyy, okeoke
-    # Pattern explanation:
-    # ^o      -> starts with 'o'
-    # [k|kay] -> followed by 'k' or 'kay'
-    # [ey|i]* -> optional trailing 'e', 'y', or 'i' 
-    # +       -> repeated one or more times
-    ok_pattern = r"^(ok|okay|oke|oky|okie|hokay|okeoke|k|kk|kkk|ogey|keke|okeokekk)[eyio]*$"
+    # Short single-letter responses need to be standalone (to avoid matching 'k' in words)
+    if q_lower in ["k", "kk", "kkk", "ok"]:
+        return True
+    
+    # Longer ok variations can use pattern matching
+    ok_pattern = r"^(okay|oke|oky|okie|hokay|okeoke|ogey|keke|okeokekk)[eyio]*$"
     
     # Also catch repetitive cases like "okeoke"
     if any(var in q_lower for var in ["okeoke", "ok ok"]):
@@ -592,89 +639,109 @@ def detect_event_category(query: str):
 
     return fest, is_general, is_cultural, is_technical
 
+def is_event_list_query(query: str) -> bool:
+    """Check if user is asking for a list of events"""
+    q = query.lower()
+    
+    # Keywords that indicate user wants a list
+    list_keywords = [
+        "list of events",
+        "all events",
+        "what are the events",
+        "which events",
+        "show events",
+        "tell me events",
+        "events in",
+        "what events",
+        "list events"
+    ]
+    
+    return any(keyword in q for keyword in list_keywords)
+
 # ---------------- MAIN CHAT ---------------- #
 
 def chat(user_message: str) -> str:
     """
     Lightweight chat function with memory optimization.
+    PRIORITY ORDER: Security → Events → Registration → Info → Pleasantries
     """
     try:
         query = user_message.strip()
         if not query:
             return "Please ask a question."
 
-        # Handle greetings
+        # 1. SECURITY: Handle meta questions and abuse first
         if is_meta_question(query):
-            return "I’m here specifically to help with Brahma ’26 and Ashwamedha ’26 event-related queries."
+            return "I'm here specifically to help with Brahma '26 and Ashwamedha '26 event-related queries."
         if is_abusive_query(query):
             return random.choice(ABUSE_RESPONSES)
-        if is_greeting(query):
-            return random.choice(GREETING_RESPONSES)
         
-        # Handle thank you
-        if is_thankyou(query):
-            return random.choice(THANKYOU_RESPONSES)
-        # Handle bye / exit
-        if is_bye(query):
-            return random.choice(BYE_RESPONSES)
-        # Handle meta / personal bot questions
-        # Quick fest detection - but only for simple queries
-        fest = fuzzy_fest_match(query)
-        if fest and is_simple_fest_query(query):
-            if fest == "brahma":
-                return random.choice(BRAHMA_RESPONSES)
-            if fest == "ashwamedha":
-                return random.choice(ASHWAMEDHA_RESPONSES)
-        
-
-        #handle okee
-        if is_okay(query):
-            return random.choice(OKAY_RESPONSES)
-        if is_registration_query(query):
-            return random.choice(REGISTRATION_RESPONSES)
-        fest, is_general, is_cultural, is_technical = detect_event_category(query)
-
-        if fest == "brahma":
-            if is_general:
-                return format_event_list(
-                "🎯 Brahma ’26 – General Events",
-                BRAHMA_GENERAL_EVENTS
-                )
-
-        if is_cultural:
-                return format_event_list(
-                "🎭 Brahma ’26 – Cultural Events",
-                BRAHMA_CULTURAL_EVENTS
-                )
-
-        if is_technical:
-            return format_event_list(
-                "⚙️ Brahma ’26 – Technical Events",
-                BRAHMA_TECHNICAL_EVENTS
-                )
-
-        if fest == "ashwamedha":
-            return format_event_list(
-                "⚙️ Ashwamedha ’26 – Technical Events",
-                ASHWAMEDHA_TECHNICAL_EVENTS
-                )
-
-        # Quick fest detection - but only for simple queries
-        fest = fuzzy_fest_match(query)
-        if fest and is_simple_fest_query(query):
-            if fest == "brahma":
-                return random.choice(BRAHMA_RESPONSES)
-            if fest == "ashwamedha":
-                return random.choice(ASHWAMEDHA_RESPONSES)
-
-        # Early exit for irrelevant queries
-        if not is_relevant_query(query):
-            return random.choice(OUT_OF_CONTEXT_RESPONSES)
-
-        # Try exact event match first (fastest)
+        # 2. PRIMARY PURPOSE: Event matching (highest priority for event bot!)
         event = find_exact_event(query)
         if event:
             return format_event_response(event, query)
+        
+        # 3. EVENT LISTS: Check if user wants list of events
+        if is_event_list_query(query):
+            fest, is_general, is_cultural, is_technical = detect_event_category(query)
+
+            if fest == "brahma":
+                if is_general:
+                    return format_event_list(
+                        "🎯 Brahma '26 – General Events",
+                        BRAHMA_GENERAL_EVENTS
+                    )
+                elif is_cultural:
+                    return format_event_list(
+                        "🎭 Brahma '26 – Cultural Events",
+                        BRAHMA_CULTURAL_EVENTS
+                    )
+                elif is_technical:
+                    return format_event_list(
+                        "⚙️ Brahma '26 – Technical Events",
+                        BRAHMA_TECHNICAL_EVENTS
+                    )
+                else:
+                    # All Brahma events
+                    all_events = BRAHMA_GENERAL_EVENTS + BRAHMA_CULTURAL_EVENTS + BRAHMA_TECHNICAL_EVENTS
+                    return format_event_list("🎉 All Brahma '26 Events", all_events)
+
+            elif fest == "ashwamedha":
+                return format_event_list(
+                    "⚙️ Ashwamedha '26 – Technical Events",
+                    ASHWAMEDHA_TECHNICAL_EVENTS
+                )
+        
+        # 4. REGISTRATION: Important action queries
+        if is_registration_query(query):
+            return random.choice(REGISTRATION_RESPONSES)
+        
+        # 5. FEST INFO: Simple "what is brahma/ashwamedha" queries
+        fest = fuzzy_fest_match(query)
+        if fest and is_simple_fest_query(query):
+            if fest == "brahma":
+                return random.choice(BRAHMA_RESPONSES)
+            if fest == "ashwamedha":
+                return random.choice(ASHWAMEDHA_RESPONSES)
+        
+        # 6. PLEASANTRIES: Handle conversational elements (lower priority)
+        if is_greeting(query):
+            return random.choice(GREETING_RESPONSES)
+        
+        if is_thankyou(query):
+            return random.choice(THANKYOU_RESPONSES)
+        
+        if is_bye(query):
+            return random.choice(BYE_RESPONSES)
+        
+        if is_okay(query):
+            return random.choice(OKAY_RESPONSES)
+
+        # 7. RELEVANCE CHECK: Early exit for irrelevant queries
+        if not is_relevant_query(query):
+            return random.choice(OUT_OF_CONTEXT_RESPONSES)
+
+        # 8. SEMANTIC SEARCH: Deep search for complex queries
 
         # Semantic search (more expensive)
         try:
@@ -693,7 +760,6 @@ def chat(user_message: str) -> str:
             
             # Generate answer
             answer = generate_answer(context, query)
-            print("this is llm")
             
             # Cleanup
             gc.collect()
@@ -707,6 +773,7 @@ def chat(user_message: str) -> str:
     except Exception as e:
         print(f"❌ Chat error: {e}")
         return "Sorry, something went wrong."
+
 def format_event_response(event: dict, query: str = "") -> str:
     """Format event info with conversational response variations, optimized to answer only what's asked"""
     name = event.get("event_name", "Unknown Event")
