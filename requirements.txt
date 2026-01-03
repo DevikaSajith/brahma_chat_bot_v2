@@ -76,4 +76,6 @@ pillow>=10.2
 #-------------------
 firebase
 #--------------------------
-pip install firebase-admin
+firebase-admin>=6.4.0
+google-cloud-firestore>=2.14.0
+
