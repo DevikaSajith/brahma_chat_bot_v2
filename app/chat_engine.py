@@ -321,12 +321,12 @@ def similarity(a: str, b: str) -> float:
     return SequenceMatcher(None, a.lower(), b.lower()).ratio()
 
 FEST_ALIASES = {
-    "brahma": ["brahma", "brama", "bhrahma", "brahama"],
-    "ashwamedha": ["ashwamedha", "aswamedha", "ashwmedha"]
+    "brahma": ["brahma", "brama", "bhrahma", "brahama", "bramma", "bramha"],
+    "ashwamedha": ["ashwamedha", "aswamedha", "ashwmedha", "ashwameda", "aswameda", "ashvameda"]
 }
 
-def fuzzy_fest_match(query: str, threshold: float = 0.72):
-    """Check if any word in query matches fest names"""
+def fuzzy_fest_match(query: str, threshold: float = 0.70):
+    """Check if any word in query matches fest names with fuzzy matching"""
     q_lower = query.lower()
     
     # Check each word in the query
@@ -334,13 +334,17 @@ def fuzzy_fest_match(query: str, threshold: float = 0.72):
     
     for fest, variants in FEST_ALIASES.items():
         for v in variants:
-            # Check if variant appears in query
+            # Check if variant appears in query (exact substring)
             if v in q_lower:
                 return fest
-            # Check similarity of each word
+            
+            # Check similarity of each word in query
             for word in words:
-                if len(word) >= 4 and similarity(word, v) >= threshold:
+                # Use lower threshold for longer words (more room for typos)
+                word_threshold = threshold if len(word) < 8 else 0.65
+                if len(word) >= 4 and similarity(word, v) >= word_threshold:
                     return fest
+    
     return None
 
 def find_exact_event(query: str):
@@ -656,27 +660,33 @@ def is_event_list_query(query: str) -> bool:
     
     # Keywords that indicate user wants a list
     list_keywords = [
-        "list of events",
+        "list of",
         "list events",
         "all events",
         "what are the events",
         "what are events",
         "which events",
         "show events",
-        "show me events",
+        "show me",
+        "show all",
         "tell me events",
         "tell me the events",
         "events in",
+        "what events are",
         "what events",
         "give me events",
+        "give me",
         "get events",
         "events list",
-        "list all events",
-        "show all events",
+        "list all",
         "what all events"
     ]
     
-    return any(keyword in q for keyword in list_keywords)
+    # Check if query contains event list keywords AND fest/event indicators
+    has_list_keyword = any(keyword in q for keyword in list_keywords)
+    has_event_indicator = "event" in q or "brahma" in q or "ashwamedha" in q or "ashwmedha" in q or "aswamedha" in q
+    
+    return has_list_keyword and has_event_indicator
 
 # ---------------- MAIN CHAT ---------------- #
 
