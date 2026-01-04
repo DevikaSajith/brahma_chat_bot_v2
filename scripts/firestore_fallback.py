@@ -28,6 +28,7 @@ def fetch_events_from_firestore():
             "slots": data.get("slots"),
             "poster": data.get("poster"),
             "amount": data.get("amount"),
+            "phone_number":doc.get("phone_number"),
             "category": data.get("category")
         })
 

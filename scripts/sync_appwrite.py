@@ -59,6 +59,7 @@ def fetch_from_appwrite():
             "slots": doc.get("slots"),
             "poster": doc.get("poster"),
             "amount": doc.get("amount"),
+            "phone_number":doc.get("phone_number"),
             "category": doc.get("category")
         })
 

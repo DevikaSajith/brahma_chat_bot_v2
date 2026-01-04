@@ -122,48 +122,25 @@ ABUSE_RESPONSES = [
     "Let’s get back to the fest! What would you like to know about Brahma or Ashwamedha?"
 ]
 BRAHMA_REGISTRATION_RESPONSES = [
-    "Brahma is ASIET's national-level cultural fest celebrating diverse arts, performances, and creativity.",
-    
-    "Brahma features dance, music, drama, literary events, and cultural competitions for art enthusiasts.",
-    
-    "Brahma is the cultural fest at ASIET where students showcase their artistic talents and creative expression.",
-    
-    "ASIET's Brahma is a premier cultural festival with competitions in dance, music, drama, and various art forms.",
-    
-    "Brahma brings together art lovers for exciting cultural performances and creative competitions at ASIET.",
-    
-    "Brahma is ASIET's biggest cultural fest featuring dance battles, music concerts, and vibrant cultural events.",
-    
-    "It's all about creativity! Brahma is ASIET's national-level cultural festival with music, dance, and artistic competitions.",
-    
-    "Brahma celebrates artistic excellence at ASIET through captivating performances, workshops, and cultural showcases.",
-    
-    "ASIET's Brahma offers students a platform to perform, create, and express their artistic talents.",
-    
-    "Brahma is where culture meets creativity! Join ASIET's premier cultural fest for exciting performances and competitions."
+    "To register for Brahma '26:\n\n"
+    "1. Visit the official Brahma '26 page: https://www.asietfest.in/brahma\n\n"
+    "2. Each participant must register individually\n\n"
+    "3. Create or join your team using the registered IDs\n\n"
+    "4. Complete the payment process\n\n"
+    "5. Event tickets will be sent to your registered email ID\n\n"
+    "6. Please check your spam/junk folder as well\n\n"
+    "For help, contact the respective event coordinators."
 ]
 
 ASHWAMEDHA_REGISTRATION_RESPONSES = [
-    "Ashwamedha is ASIET's national-level technical fest showcasing innovation and engineering excellence.",
-    
-    "Ashwamedha features coding contests, hackathons, robotics events, and technical competitions for tech enthusiasts.",
-    
-    "Ashwamedha is the technical fest at ASIET where students showcase their engineering skills and innovative ideas.",
-    
-    "ASIET's Ashwamedha is a premier technical festival with competitions in coding, robotics, and various tech domains.",
-    
-    "Ashwamedha brings together tech enthusiasts for exciting technical competitions and workshops at ASIET.",
-    
-    "Ashwamedha is ASIET's biggest tech fest featuring hackathons, robotics challenges, and cutting-edge technical events.",
-    
-    "It's all about innovation! Ashwamedha is ASIET's national-level technical festival with coding, robotics, and engineering competitions.",
-    
-    "Ashwamedha celebrates technical excellence at ASIET through challenging events, hands-on workshops, and competitive programming.",
-    
-    "ASIET's Ashwamedha offers students a platform to compete, innovate, and showcase their technical prowess.",
-    
-    "Ashwamedha is where engineering meets innovation! Join ASIET's premier technical fest for exciting challenges and competitions."
-]
+    "To register for Ashwamedha '26:\n\n"
+    "1. Visit the official Ashwamedha '26 page: https://www.asietfest.in/ashwamedha\n\n"
+    "2. Each participant must register individually\n\n"
+    "3. Create or join your team using the registered IDs\n\n"
+    "4. Complete the payment process\n\n"
+    "5. Event tickets will be sent to your registered email ID\n\n"
+    "6. Please check your spam/junk folder as well\n\n"
+    "For help, contact the respective event coordinators."]
 # ---------------- EVENT LIST RESPONSES ---------------- #
 
 BRAHMA_GENERAL_EVENTS = [
