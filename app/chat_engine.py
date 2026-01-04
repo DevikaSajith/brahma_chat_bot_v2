@@ -19,48 +19,48 @@ def get_analytics():
 
 # Response variations
 BRAHMA_RESPONSES = [
-    "Brahma ’26 is the annual cultural festival of Adi Shankara Institute of Engineering and Technology (ASIET), bringing together students to celebrate music, dance, drama, art, and creative expression through a wide range of competitions and performances.",
+    "Brahma '26 is the annual cultural festival of Adi Shankara Institute of Engineering and Technology (ASIET), celebrating music, dance, art, and creative expression.",
     
-    "Brahma ’26 is ASIET’s flagship cultural fest, featuring vibrant stage events, competitive performances, workshops, pro-shows, and artistic showcases that highlight the creativity and talent of students across disciplines.",
+    "Brahma is ASIET's flagship cultural fest featuring competitive events, pro-shows, and workshops that showcase student talent.",
     
-    "As ASIET’s premier cultural festival, Brahma ’26 provides a platform for students to express themselves through music, dance, drama, fine arts, and literary events, creating an atmosphere of celebration and collaboration.",
+    "Brahma '26 is ASIET's premier cultural festival where students shine through music, dance, drama, and various art forms.",
     
-    "The Brahma festival is ASIET’s biggest cultural celebration, filled with exciting competitions, energetic performances, interactive workshops, and memorable pro-shows that engage participants and audiences alike.",
+    "The Brahma festival is ASIET's biggest cultural celebration with exciting events, competitions, and unforgettable performances.",
     
-    "Brahma ’26 brings together students from different departments to participate in diverse cultural events, encouraging creativity, teamwork, and artistic excellence throughout the duration of the festival.",
+    "Brahma '26 brings together students for an amazing cultural experience at ASIET with diverse events and activities.",
     
-    "Brahma ’26 is a grand cultural extravaganza at ASIET that showcases student talent in performing arts, visual arts, and creative expression, making it one of the most anticipated events of the academic year.",
+    "Brahma is ASIET's grand cultural extravaganza showcasing creativity, talent, and student spirit through vibrant performances.",
     
-    "Through Brahma ’26, ASIET celebrates culture, creativity, and student spirit by hosting a wide variety of events including dance battles, music competitions, stage performances, and cultural exhibitions.",
+    "Brahma '26 is where culture meets creativity at ASIET! Expect dance battles, music competitions, and exciting stage events.",
     
-    "Brahma ’26 serves as a vibrant cultural platform where students can explore their artistic interests, compete in creative events, and enjoy an energetic campus atmosphere filled with performances and celebrations.",
+    "ASIET's Brahma '26 is the ultimate cultural fest featuring everything from traditional performances to modern artistic expressions.",
     
-    "Recognized as ASIET’s signature cultural fest, Brahma ’26 combines tradition and modern creativity through engaging events, professional shows, and student-led performances that reflect diverse cultural influences.",
+    "Brahma '26 celebrates the artistic spirit of ASIET with engaging competitions, workshops, and spectacular shows.",
     
-    "Brahma ’26 is more than just a festival—it is a celebration of talent, creativity, and unity at ASIET, offering students an opportunity to perform, compete, and connect through a rich cultural experience."
+    "It's ASIET's biggest cultural celebration! Brahma '26 offers students a platform to perform, compete, and connect through art and culture."
 ]
 
 
 ASHWAMEDHA_RESPONSES = [
-    "Ashwamedha is ASIET’s national-level technical festival that celebrates innovation, engineering excellence, and problem-solving skills through a wide range of competitive and collaborative technical events.",
+    "Ashwamedha is ASIET's national-level technical fest showcasing innovation and engineering excellence.",
     
-    "Ashwamedha brings together students and technology enthusiasts to participate in coding contests, hackathons, robotics challenges, and engineering competitions that test creativity and technical expertise.",
+    "Ashwamedha features coding contests, hackathons, robotics events, and technical competitions for tech enthusiasts.",
     
-    "As the flagship technical fest of ASIET, Ashwamedha provides a platform for students to showcase their engineering skills, innovative ideas, and practical knowledge across multiple technical domains.",
+    "Ashwamedha is the technical fest at ASIET where students showcase their engineering skills and innovative ideas.",
     
-    "ASIET’s Ashwamedha is a premier technical festival featuring competitive events, hands-on workshops, and technical challenges in areas such as coding, robotics, electronics, and emerging technologies.",
+    "ASIET's Ashwamedha is a premier technical festival with competitions in coding, robotics, and various tech domains.",
     
-    "Ashwamedha encourages innovation and technical thinking by hosting events that focus on real-world problem solving, teamwork, and the application of engineering concepts in practical scenarios.",
+    "Ashwamedha brings together tech enthusiasts for exciting technical competitions and workshops at ASIET.",
     
-    "Through Ashwamedha, ASIET creates an engaging technical environment where students can compete, collaborate, and learn through hackathons, technical quizzes, and skill-based challenges.",
+    "Ashwamedha is ASIET's biggest tech fest featuring hackathons, robotics challenges, and cutting-edge technical events.",
     
-    "Ashwamedha is a national-level technical extravaganza that attracts participants interested in programming, robotics, automation, and various engineering disciplines, fostering a culture of innovation.",
+    "It's all about innovation! Ashwamedha is ASIET's national-level technical festival with coding, robotics, and engineering competitions.",
     
-    "Recognized as ASIET’s signature technical fest, Ashwamedha blends competition and learning through well-structured technical events, expert-led workshops, and student-driven innovation.",
+    "Ashwamedha celebrates technical excellence at ASIET through challenging events, hands-on workshops, and competitive programming.",
     
-    "Ashwamedha provides students with opportunities to enhance their technical skills, gain practical experience, and interact with like-minded peers through a series of challenging and rewarding events.",
+    "ASIET's Ashwamedha offers students a platform to compete, innovate, and showcase their technical prowess.",
     
-    "More than just a fest, Ashwamedha represents ASIET’s commitment to technical excellence by offering a platform for experimentation, creativity, and engineering-driven problem solving."
+    "Ashwamedha is where engineering meets innovation! Join ASIET's premier technical fest for exciting challenges and competitions."
 ]
 
 
@@ -121,15 +121,26 @@ ABUSE_RESPONSES = [
     "If you’re looking for event details, I’m happy to help.",
     "Let’s get back to the fest! What would you like to know about Brahma or Ashwamedha?"
 ]
-REGISTRATION_RESPONSES = [
-    "To register for events at Brahma '26 or Ashwamedha '26, follow these steps:\n\n1. Visit the official ASIET fest website at www.asietfest.in\n\n2. Navigate to the 'Events' section from the home page\n\n3. Browse and select the event you want to participate in\n\n4. Click on 'Register Now' and fill in your details (name, email, phone, college)\n\n5. Proceed to payment and complete the transaction\n\n6. After successful payment, you'll receive a confirmation email with your ticket\n\n7. Don't forget to check your spam folder if you don't see the email!\n\nFor any registration issues, contact the event coordinators.",
-
-    "Here's how you can register for Brahma '26 or Ashwamedha '26 events:\n\n📝 Step 1: Go to www.asietfest.in\n\n📝 Step 2: Click on 'Events' in the navigation menu\n\n📝 Step 3: Choose your event and click 'Register'\n\n📝 Step 4: Fill in your personal details\n\n📝 Step 5: Complete the payment process\n\n📝 Step 6: Check your email for the ticket confirmation (check spam too!)\n\nNeed help? Reach out to the event coordinator for assistance.",
-
-    "Registration is easy! Just follow these steps:\n\n→ Open www.asietfest.in in your browser\n\n→ Go to the home page and find 'Events'\n\n→ Select the event you're interested in\n\n→ Click 'Register Now' and enter your details\n\n→ Make the payment for registration\n\n→ Your ticket will be emailed to you after successful payment\n\n→ Remember to check spam/junk folder as well!\n\nContact the event coordinator if you face any issues during registration.",
-
-    "Want to participate? Here's the registration process:\n\n1️⃣ Visit the official website: www.asietfest.in\n\n2️⃣ Head to the Events page\n\n3️⃣ Find and select your event\n\n4️⃣ Click 'Register' and provide your information\n\n5️⃣ Pay the registration fee online\n\n6️⃣ You'll receive your ticket via email (check spam folder too!)\n\nIf you have questions about registration, contact the event coordinator listed for that event."
+BRAHMA_REGISTRATION_RESPONSES = [
+    "To register for Brahma '26:\n\n"
+    "1. Visit the official Brahma '26 page: https://www.asietfest.in/brahma\n\n"
+    "2. Each participant must register individually\n\n"
+    "3. Create or join your team using the registered IDs\n\n"
+    "4. Complete the payment process\n\n"
+    "5. Event tickets will be sent to your registered email ID\n\n"
+    "6. Please check your spam/junk folder as well\n\n"
+    "For help, contact the respective event coordinators."
 ]
+
+ASHWAMEDHA_REGISTRATION_RESPONSES = [
+    "To register for Ashwamedha '26:\n\n"
+    "1. Visit the official Ashwamedha '26 page: https://www.asietfest.in/ashwamedha\n\n"
+    "2. Each participant must register individually\n\n"
+    "3. Create or join your team using the registered IDs\n\n"
+    "4. Complete the payment process\n\n"
+    "5. Event tickets will be sent to your registered email ID\n\n"
+    "6. Please check your spam/junk folder as well\n\n"
+    "For help, contact the respective event coordinators."]
 # ---------------- EVENT LIST RESPONSES ---------------- #
 
 BRAHMA_GENERAL_EVENTS = [
@@ -581,30 +592,45 @@ def is_simple_fest_query(query: str) -> bool:
     """Check if it's a simple 'what is brahma/ashwamedha' query"""
     q_lower = query.lower().strip()
     
-    # Just the fest name alone
-    simple_patterns = [
-        r"^(what is |what's |whats |tell me about |explain )?bh?rama$",
-        r"^(what is |what's |whats |tell me about |explain )?ashwamedha$",
-        r"^bh?rama\??$",
-        r"^ashwamedha\??$",
-    ]
-    
-    for pattern in simple_patterns:
-        if re.match(pattern, q_lower):
-            return True
-    
-    # Check for deep/complex question indicators
+    # Check for deep/complex question indicators first
     deep_keywords = ["history", "when started", "why called", "origin", "background", 
                      "story", "past", "previous", "earlier", "evolution", "tradition",
-                     "how many", "who founded", "who started", "details about"]
+                     "how many", "who founded", "who started", "details about", "founded in"]
     
     if any(keyword in q_lower for keyword in deep_keywords):
         return False  # It's a deep question, needs semantic search
     
-    # Simple "what is brahma" style
-    words = q_lower.split()
-    if len(words) <= 4 and any(w in ["what", "whats", "explain", "tell"] for w in words):
-        return True
+    # Remove common punctuation for easier matching
+    q_normalized = q_lower.replace("?", "").replace("!", "").strip()
+    
+    # Just the fest name alone or with minimal words
+    simple_patterns = [
+        r"^bh?rama$",
+        r"^ashwamedha$",
+        r"^aswamedha$",
+        r"^what is bh?rama",
+        r"^what's bh?rama",
+        r"^whats bh?rama",
+        r"^tell me about bh?rama",
+        r"^explain bh?rama",
+        r"^about bh?rama",
+        r"^what is ashwamedha",
+        r"^what's ashwamedha",
+        r"^whats ashwamedha",
+        r"^tell me about ashwamedha",
+        r"^explain ashwamedha",
+        r"^about ashwamedha",
+    ]
+    
+    for pattern in simple_patterns:
+        if re.match(pattern, q_normalized):
+            return True
+    
+    # If query is very short (1-3 words) and mentions fest, it's probably simple
+    words = q_normalized.split()
+    if len(words) <= 3:
+        if any(fest in q_normalized for fest in ["brahma", "brama", "ashwamedha", "aswamedha"]):
+            return True
     
     return False
 
@@ -693,7 +719,7 @@ def is_event_list_query(query: str) -> bool:
 def chat(user_message: str) -> str:
     """
     Lightweight chat function with memory optimization.
-    PRIORITY ORDER: Security → Events → Registration → Info → Pleasantries
+    PRIORITY: Pleasantries → Simple Fest Info → Relevance Check → Events → Registration → Semantic Search
     """
     analytics = get_analytics()
     
@@ -712,14 +738,51 @@ def chat(user_message: str) -> str:
                 analytics["pattern_matches"]["abuse"] += 1
             return random.choice(ABUSE_RESPONSES)
         
-        # 2. PRIMARY PURPOSE: Event matching (highest priority for event bot!)
+        # 2. PLEASANTRIES: Handle conversational elements early
+        if is_greeting(query):
+            if analytics:
+                analytics["pattern_matches"]["greeting"] += 1
+            return random.choice(GREETING_RESPONSES)
+        
+        if is_thankyou(query):
+            if analytics:
+                analytics["pattern_matches"]["thankyou"] += 1
+            return random.choice(THANKYOU_RESPONSES)
+        
+        if is_bye(query):
+            if analytics:
+                analytics["pattern_matches"]["bye"] += 1
+            return random.choice(BYE_RESPONSES)
+        
+        if is_okay(query):
+            if analytics:
+                analytics["pattern_matches"]["okay"] += 1
+            return random.choice(OKAY_RESPONSES)
+        
+        # 3. FEST INFO: Simple "what is brahma/ashwamedha" queries (before complex matching)
+        fest = fuzzy_fest_match(query)
+        if fest and is_simple_fest_query(query):
+            if analytics:
+                analytics["pattern_matches"]["fest_info"] += 1
+            if fest == "brahma":
+                return random.choice(BRAHMA_RESPONSES)
+            if fest == "ashwamedha":
+                return random.choice(ASHWAMEDHA_RESPONSES)
+
+        # 4. RELEVANCE CHECK: Early exit for irrelevant queries (before expensive operations)
+        if not is_relevant_query(query):
+            if analytics:
+                analytics["pattern_matches"]["out_of_context"] += 1
+            return random.choice(OUT_OF_CONTEXT_RESPONSES)
+        
+        # 5. PRIMARY PURPOSE: Event matching (fast, direct lookup)
         event = find_exact_event(query)
         if event:
             if analytics:
                 analytics["event_matches"] += 1
             return format_event_response(event, query)
         
-        # 3. EVENT LISTS: Check if user wants list of events
+        # 6. EVENT LISTS: Check if user wants list of events
         if is_event_list_query(query):
             if analytics:
                 analytics["pattern_matches"]["event_list"] += 1
@@ -761,52 +824,24 @@ def chat(user_message: str) -> str:
                 )
                 return format_event_list("ASIET Festivals", all_events)
         
-        # 4. REGISTRATION: Important action queries
+        # 7. REGISTRATION: Important action queries
         if is_registration_query(query):
             if analytics:
                 analytics["pattern_matches"]["registration"] += 1
-            return random.choice(REGISTRATION_RESPONSES)
-        
-        # 5. FEST INFO: Simple "what is brahma/ashwamedha" queries
-        fest = fuzzy_fest_match(query)
-        if fest and is_simple_fest_query(query):
-            if analytics:
-                analytics["pattern_matches"]["fest_info"] += 1
+            fest = fuzzy_fest_match(query)
             if fest == "brahma":
-                return random.choice(BRAHMA_RESPONSES)
+                return random.choice(BRAHMA_REGISTRATION_RESPONSES)
             if fest == "ashwamedha":
-                return random.choice(ASHWAMEDHA_RESPONSES)
-        
-        # 6. PLEASANTRIES: Handle conversational elements (lower priority)
-        if is_greeting(query):
-            if analytics:
-                analytics["pattern_matches"]["greeting"] += 1
-            return random.choice(GREETING_RESPONSES)
-        
-        if is_thankyou(query):
-            if analytics:
-                analytics["pattern_matches"]["thankyou"] += 1
-            return random.choice(THANKYOU_RESPONSES)
-        
-        if is_bye(query):
-            if analytics:
-                analytics["pattern_matches"]["bye"] += 1
-            return random.choice(BYE_RESPONSES)
-        
-        if is_okay(query):
-            if analytics:
-                analytics["pattern_matches"]["okay"] += 1
-            return random.choice(OKAY_RESPONSES)
+                return random.choice(ASHWAMEDHA_REGISTRATION_RESPONSES)
+            # Fallback if fest not mentioned
+            return (
+                "Please specify the fest you want to register for.\n\n"
+                "You can say:\n"
+                "• Register for Brahma '26\n"
+                "• Register for Ashwamedha '26"
+            )
 
-        # 7. RELEVANCE CHECK: Early exit for irrelevant queries
-        if not is_relevant_query(query):
-            if analytics:
-                analytics["pattern_matches"]["out_of_context"] += 1
-            return random.choice(OUT_OF_CONTEXT_RESPONSES)
-
-        # 8. SEMANTIC SEARCH: Deep search for complex queries
-
-        # Semantic search (more expensive)
+        # 8. SEMANTIC SEARCH: Complex queries (more expensive, used as last resort)
         try:
             if analytics:
                 analytics["semantic_search_calls"] += 1
@@ -850,6 +885,7 @@ def format_event_response(event: dict, query: str = "") -> str:
     venue = safe(event.get("venue"))
     details = safe(event.get("details"), "")
     coordinator = format_names(event.get("coordinator"))
+    phone = safe(event.get("phone_number"))
     fest = safe(event.get("fest"))
     slots = safe(event.get("slots"))
     poster = safe(event.get("poster"))
@@ -859,16 +895,16 @@ def format_event_response(event: dict, query: str = "") -> str:
     q_lower = query.lower()
     
     # Detect what specific info is being asked
-    asking_venue = any(word in q_lower for word in ["venue", "where", "location", "place", "held"])
-    asking_time = any(word in q_lower for word in ["time", "when", "start", "begin"])
-    asking_date = any(word in q_lower for word in ["date", "day", "when"])
-    asking_coordinator = any(word in q_lower for word in ["coordinator", "contact", "who", "organize", "reach"])
-    asking_what = any(word in q_lower for word in ["what", "about", "detail", "describe"])
-    asking_fest = any(word in q_lower for word in ["fest", "festival", "occasion"])
-    asking_slots = any(word in q_lower for word in ["slots", "seats", "vacancy", "available", "limit"])
-    asking_poster = any(word in q_lower for word in ["poster", "image", "picture", "flyer"])
-    asking_amount = any(word in q_lower for word in ["amount", "price", "fee", "cost", "registration", "charge", "money", "pay", "payment", "paid", "rates", "pricing", "charges", "how much"])
-    asking_category = any(word in q_lower for word in ["category", "type", "kind", "genre"])
+    asking_venue = any(word in q_lower for word in ["venue", "venu", "vanue", "vennue", "where", "wher", "were", "whre", "location", "lokation", "locaton", "loaction", "place", "plase", "plce", "held"])
+    asking_time = any(word in q_lower for word in ["time", "tym", "tyme", "when", "wen", "whn", "start", "strt", "stat", "begin"])
+    asking_date = any(word in q_lower for word in ["date", "dat", "dait", "day", "when", "wen", "whn"])
+    asking_coordinator = any(word in q_lower for word in ["coordinator", "cordinator", "coordinater", "co-ordinator", "coordnator", "contact", "contct", "cantact", "contat", "who", "organize", "organise", "orgnaize", "organiz", "reach", "phone", "fone", "phon", "phn", "number", "nmbr", "numbr", "no", "num", "call", "mobile", "mobil", "moble", "organizer", "organiser", "organisor", "incharge", "in-charge"])
+    asking_what = any(word in q_lower for word in ["what", "wat", "wht", "about", "abt", "abut", "detail", "details", "detial", "detal", "describe", "descibe", "descrbe"])
+    asking_fest = any(word in q_lower for word in ["fest", "fst", "fiest", "festival", "festivel", "festivl", "festval", "occasion"])
+    asking_slots = any(word in q_lower for word in ["slots", "sloat", "slts", "seats", "seets", "sats", "vacancy", "available", "availble", "avaiable", "avalable", "limit"])
+    asking_poster = any(word in q_lower for word in ["poster", "postr", "pster", "image", "imge", "img", "picture", "pic", "pictur", "pict", "flyer"])
+    asking_amount = any(word in q_lower for word in ["amount", "ammount", "amnt", "amt", "price", "pric", "prise", "fee", "fe", "fees", "cost", "cst", "coost", "registration", "registraton", "regestration", "charge", "charg", "chrg", "charges", "money", "pay", "payment", "payement", "paymnt", "paid", "rates", "pricing", "how much"])
+    asking_category = any(word in q_lower for word in ["category", "categry", "catagory", "catgory", "type", "typ", "tipe", "kind", "genre"])
     
     # Count how many aspects are being asked
     aspects_count = sum([
@@ -947,12 +983,13 @@ def format_event_response(event: dict, query: str = "") -> str:
     # If only asking about coordinator
     if asking_coordinator and aspects_count == 1:
         if coordinator != "not specified":
+            phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
             responses = [
-                f"The coordinator for {name} is {coordinator}.",
-                f"You can contact {coordinator} for {name}.",
-                f"{coordinator} is coordinating {name}.",
-                f"Reach out to {coordinator} for more details about {name}.",
-                f"The point of contact is {coordinator}."
+                f"The coordinator for {name} is {coordinator}{phone_info}.",
+                f"You can contact {coordinator}{phone_info} for {name}.",
+                f"{coordinator} is coordinating {name}{phone_info}.",
+                f"Reach out to {coordinator}{phone_info} for more details about {name}.",
+                f"The point of contact is {coordinator}{phone_info}."
             ]
             return random.choice(responses)
         else:
@@ -993,11 +1030,12 @@ def format_event_response(event: dict, query: str = "") -> str:
 
     if asking_time and asking_coordinator and aspects_count == 2:
         if coordinator != "not specified":
+            phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
             return random.choice([
-                f"{name} starts at {time} and is coordinated by {coordinator}.",
-                f"The event begins at {time}. Coordinators: {coordinator}.",
-                f"{coordinator} are coordinating {name}, which starts at {time}.",
-                f"You can attend {name} at {time}. The coordinators are {coordinator}."
+                f"{name} starts at {time} and is coordinated by {coordinator}{phone_info}.",
+                f"The event begins at {time}. Coordinators: {coordinator}{phone_info}.",
+                f"{coordinator} are coordinating {name}, which starts at {time}. Contact: {phone if phone != 'not specified' else 'N/A'}.",
+                f"You can attend {name} at {time}. The coordinators are {coordinator}{phone_info}."
             ])
         else:
             return f"{name} starts at {time}, but coordinator details are not available."
@@ -1062,11 +1100,12 @@ def format_event_response(event: dict, query: str = "") -> str:
 
     if asking_date and asking_coordinator and aspects_count == 2:
         if coordinator != "not specified":
+            phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
             return random.choice([
-                f"{name} is on {date}. Coordinator: {coordinator}.",
-                f"The event is on {date}, coordinated by {coordinator}.",
-                f"{name} happens on {date}. Contact {coordinator} for details.",
-                f"On {date}, {name} will be organized by {coordinator}."
+                f"{name} is on {date}. Coordinator: {coordinator}{phone_info}.",
+                f"The event is on {date}, coordinated by {coordinator}{phone_info}.",
+                f"{name} happens on {date}. Contact {coordinator} at {phone if phone != 'not specified' else 'coordinator'} for details.",
+                f"On {date}, {name} will be organized by {coordinator}{phone_info}."
             ])
         return f"{name} is on {date}, but coordinator details are not available."
 
@@ -1114,65 +1153,71 @@ def format_event_response(event: dict, query: str = "") -> str:
     # Coordinator combinations
     if asking_coordinator and asking_venue and aspects_count == 2:
         if coordinator != "not specified":
+            phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
             return random.choice([
-                f"{name} will be held at {venue} and is coordinated by {coordinator}.",
-                f"The venue for {name} is {venue}. Coordinators: {coordinator}.",
-                f"{coordinator} are coordinating {name}, which will take place at {venue}.",
-                f"You can find {name} at {venue}. The coordinators are {coordinator}."
+                f"{name} will be held at {venue} and is coordinated by {coordinator}{phone_info}.",
+                f"The venue for {name} is {venue}. Coordinators: {coordinator}{phone_info}.",
+                f"{coordinator} are coordinating {name}, which will take place at {venue}. Contact: {phone if phone != 'not specified' else 'N/A'}.",
+                f"You can find {name} at {venue}. The coordinators are {coordinator}{phone_info}."
             ])
         else:
             return f"{name} will be held at {venue}, but coordinator details are not available."
 
     if asking_coordinator and asking_fest and aspects_count == 2:
         if coordinator != "not specified":
+            phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
             return random.choice([
-                f"{name} is part of {fest}, coordinated by {coordinator}.",
-                f"{coordinator} are organizing {name} during {fest}.",
-                f"The {fest} event {name} is coordinated by {coordinator}.",
-                f"{name} ({fest}) - Coordinator: {coordinator}."
+                f"{name} is part of {fest}, coordinated by {coordinator}{phone_info}.",
+                f"{coordinator} are organizing {name} during {fest}. Contact: {phone if phone != 'not specified' else 'N/A'}.",
+                f"The {fest} event {name} is coordinated by {coordinator}{phone_info}.",
+                f"{name} ({fest}) - Coordinator: {coordinator}{phone_info}."
             ])
         return f"{name} is part of {fest}, but coordinator details are not available."
 
     if asking_coordinator and asking_slots and aspects_count == 2:
         if coordinator != "not specified":
+            phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
             return random.choice([
-                f"{name} has {slots} slots. Coordinator: {coordinator}.",
-                f"There are {slots} seats available. Contact {coordinator} for {name}.",
-                f"{coordinator} are coordinating {name}, which has {slots} slots.",
-                f"{name} - {slots} slots available. Reach out to {coordinator}."
+                f"{name} has {slots} slots. Coordinator: {coordinator}{phone_info}.",
+                f"There are {slots} seats available. Contact {coordinator} at {phone if phone != 'not specified' else 'coordinator'} for {name}.",
+                f"{coordinator} are coordinating {name}, which has {slots} slots. Phone: {phone if phone != 'not specified' else 'N/A'}.",
+                f"{name} - {slots} slots available. Reach out to {coordinator}{phone_info}."
             ])
         return f"{name} has {slots} slots, but coordinator details are not available."
 
     if asking_coordinator and asking_poster and aspects_count == 2:
+        phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
         if coordinator != "not specified" and poster != "not specified":
             return random.choice([
-                f"{name} is coordinated by {coordinator}. Poster: {poster}",
-                f"Contact {coordinator} for {name}. Check poster: {poster}",
-                f"Coordinator: {coordinator}. View poster here: {poster}"
+                f"{name} is coordinated by {coordinator}{phone_info}. Poster: {poster}",
+                f"Contact {coordinator} at {phone if phone != 'not specified' else 'coordinator'} for {name}. Check poster: {poster}",
+                f"Coordinator: {coordinator}{phone_info}. View poster here: {poster}"
             ])
         elif coordinator != "not specified":
-            return f"{name} is coordinated by {coordinator}, but the poster is not available."
+            return f"{name} is coordinated by {coordinator}{phone_info}, but the poster is not available."
         return f"The poster is available at {poster}, but coordinator details are not specified."
 
     if asking_coordinator and asking_amount and aspects_count == 2:
         if coordinator != "not specified":
+            phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
             return random.choice([
-                f"{name} has a registration fee of {amount}. Coordinator: {coordinator}.",
-                f"The fee is {amount}. Contact {coordinator} for {name}.",
-                f"{coordinator} are coordinating {name}, which costs {amount}.",
-                f"{name} - Fee: {amount}. Reach out to {coordinator}.",
-                f"It costs {amount}. You can contact {coordinator} for more details.",
-                f"{coordinator} are organizing {name}. The registration fee is {amount}."
+                f"{name} has a registration fee of {amount}. Coordinator: {coordinator}{phone_info}.",
+                f"The fee is {amount}. Contact {coordinator} at {phone if phone != 'not specified' else 'coordinator'} for {name}.",
+                f"{coordinator} are coordinating {name}, which costs {amount}. Phone: {phone if phone != 'not specified' else 'N/A'}.",
+                f"{name} - Fee: {amount}. Reach out to {coordinator}{phone_info}.",
+                f"It costs {amount}. You can contact {coordinator}{phone_info} for more details.",
+                f"{coordinator} are organizing {name}. The registration fee is {amount}. Contact: {phone if phone != 'not specified' else 'N/A'}."
             ])
         return f"{name} costs {amount}, but coordinator details are not available."
 
     if asking_coordinator and asking_category and aspects_count == 2:
         if coordinator != "not specified":
+            phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
             return random.choice([
-                f"{name} is a {category} event coordinated by {coordinator}.",
-                f"This {category} event is organized by {coordinator}.",
-                f"{coordinator} are coordinating {name} ({category}).",
-                f"{name} ({category}) - Coordinator: {coordinator}."
+                f"{name} is a {category} event coordinated by {coordinator}{phone_info}.",
+                f"This {category} event is organized by {coordinator}{phone_info}.",
+                f"{coordinator} are coordinating {name} ({category}). Contact: {phone if phone != 'not specified' else 'N/A'}.",
+                f"{name} ({category}) - Coordinator: {coordinator}{phone_info}."
             ])
         return f"{name} is a {category} event, but coordinator details are not available."
 
@@ -1379,9 +1424,10 @@ def format_event_response(event: dict, query: str = "") -> str:
         return f"{name} ({category}): The fee is {amount} for {slots} slots. Coordinator: {coordinator}."
     
     # Default: Full information with conversational variations
+    phone_info = f" (Phone: {phone})" if phone != "not specified" else ""
     templates = [
         f"{name} is a {category} event happening on {date} at {time} at {venue} as part of {fest}. Fee: {amount}. Slots: {slots}. {details}" + 
-        (f" You can contact {coordinator} for more details." if coordinator != "not specified" else ""),
+        (f" You can contact {coordinator}{phone_info} for more details." if coordinator != "not specified" else ""),
         
         f"Sure! {name} is a {category} event in {fest} scheduled for {date} at {time}. {details} Venue: {venue}. Amount: {amount}." +
         (f" For more info, reach out to {coordinator}." if coordinator != "not specified" else ""),
