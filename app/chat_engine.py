@@ -19,25 +19,25 @@ def get_analytics():
 
 # Response variations
 BRAHMA_RESPONSES = [
-    "Brahma '26 is the annual cultural festival of Adi Shankara Institute of Engineering and Technology (ASIET), celebrating music, dance, art, and creative expression.",
+    "Brahma '26 is the flagship cultural and technical fest of Adi Shankara Institute of Engineering and Technology (ASIET), celebrating music, dance, art, and creative expression.",
     
-    "Brahma is ASIET's flagship cultural fest featuring competitive events, pro-shows, and workshops that showcase student talent.",
+    "Brahma is ASIET's flagship cultural and technical fest featuring competitive events, pro-shows, and workshops that showcase student talent.",
     
-    "Brahma '26 is ASIET's premier cultural festival where students shine through music, dance, drama, and various art forms.",
+    "Brahma '26 is ASIET's premier  cultural and technical fest where students shine through music, dance, drama, and various art forms.",
     
-    "The Brahma festival is ASIET's biggest cultural celebration with exciting events, competitions, and unforgettable performances.",
+    "The Brahma festival is ASIET's biggest cultural and technical celebration with exciting events, competitions, and unforgettable performances.",
     
-    "Brahma '26 brings together students for an amazing cultural experience at ASIET with diverse events and activities.",
+    "Brahma '26 brings together students for an amazing cultural and technical experience at ASIET with diverse events and activities.",
     
-    "Brahma is ASIET's grand cultural extravaganza showcasing creativity, talent, and student spirit through vibrant performances.",
+    "Brahma is ASIET's grand cultural and technical extravaganza showcasing creativity, talent, and student spirit through vibrant performances.",
     
     "Brahma '26 is where culture meets creativity at ASIET! Expect dance battles, music competitions, and exciting stage events.",
     
-    "ASIET's Brahma '26 is the ultimate cultural fest featuring everything from traditional performances to modern artistic expressions.",
+    "ASIET's Brahma '26 is the ultimate cultural and technical fest featuring everything from traditional performances to modern artistic expressions,tech events etc...",
     
     "Brahma '26 celebrates the artistic spirit of ASIET with engaging competitions, workshops, and spectacular shows.",
     
-    "It's ASIET's biggest cultural celebration! Brahma '26 offers students a platform to perform, compete, and connect through art and culture."
+    "It's ASIET's biggest cultural and technical celebration! Brahma '26 offers students a platform to perform, compete, and connect through art,technology and culture."
 ]
 
 
@@ -123,7 +123,7 @@ ABUSE_RESPONSES = [
 ]
 BRAHMA_REGISTRATION_RESPONSES = [
     "To register for Brahma '26:\n\n"
-    "1. Visit the official Brahma '26 page: https://www.asietfest.in/brahma\n\n"
+    "1. Visit the official Brahma '26 page: (https://www.brahma26.com)\n\n"
     "2. Each participant must register individually\n\n"
     "3. Create or join your team using the registered IDs\n\n"
     "4. Complete the payment process\n\n"
@@ -134,13 +134,14 @@ BRAHMA_REGISTRATION_RESPONSES = [
 
 ASHWAMEDHA_REGISTRATION_RESPONSES = [
     "To register for Ashwamedha '26:\n\n"
-    "1. Visit the official Ashwamedha '26 page: https://www.asietfest.in/ashwamedha\n\n"
+    "1. Visit the official Ashwamedha '26 page: (https://www.asietfest.in/ashwamedha)\n\n"
     "2. Each participant must register individually\n\n"
     "3. Create or join your team using the registered IDs\n\n"
     "4. Complete the payment process\n\n"
     "5. Event tickets will be sent to your registered email ID\n\n"
     "6. Please check your spam/junk folder as well\n\n"
-    "For help, contact the respective event coordinators."]
+    "For help, contact the respective event coordinators."
+]
 # ---------------- EVENT LIST RESPONSES ---------------- #
 
 BRAHMA_GENERAL_EVENTS = [
@@ -249,6 +250,39 @@ CAPABILITY_RESPONSES = [
     "I provide information on all Brahma '26 events including timings, locations, and how to participate. Ask away!",
     "I help with event details, festival schedules, venue information, and coordinator contacts for Brahma '26! 🎊",
 ]
+# Location/Map Section
+ASIET_MAP_LINK = "https://maps.app.goo.gl/BfothG9r8dmKTAJaA"
+
+LOCATION_RESPONSES = [
+    (
+        "📍 ASIET Campus Location\n\n"
+        "Adi Shankara Institute of Engineering and Technology\n"
+        "Vidya Bharathi Nagar, Mattoor, Kalady, Kerala 683574\n\n"
+        "🗺️ Google Maps:\n"
+        f"{ASIET_MAP_LINK}\n\n"
+        "You can tap the link above to:\n"
+        "• Get directions\n"
+        "• Check travel time\n"
+        "• Find nearby facilities"
+    ),
+
+    (
+        "🏫 How to Reach ASIET\n\n"
+        "Address:\n"
+        "Adi Shankara Institute of Engineering and Technology,\n"
+        "Vidya Bharathi Nagar, Mattoor, Kalady, Kerala 683574\n\n"
+        "📍 Open in Google Maps:\n"
+        f"{ASIET_MAP_LINK}"
+    ),
+
+    (
+        "📍 ASIET Location\n\n"
+        f"{ASIET_MAP_LINK}\n\n"
+        "Click the link above to open the campus location directly in Google Maps."
+    )
+]
+
+
 
 # ---------------- HELPERS ---------------- #
 
@@ -295,6 +329,9 @@ def is_meta_question(query: str) -> bool:
         "are you real",
         "are you human",
         "what are you",
+        "what areyou",
+        "whatareyou",
+        "why you",
         "who are you",
         "your creator",
         "your developer"
@@ -330,6 +367,7 @@ def format_names(names):
 
 def similarity(a: str, b: str) -> float:
     return SequenceMatcher(None, a.lower(), b.lower()).ratio()
+
 
 FEST_ALIASES = {
     "brahma": ["brahma", "brama", "bhrahma", "brahama", "bramma", "bramha"],
@@ -497,7 +535,7 @@ def is_bye(query: str) -> bool:
     words = set(re.findall(r"\b[a-zA-Z]+\b", q_norm))
 
     # Short words that need exact word match (to avoid "no" matching "know", "innovation", etc.)
-    short_byes = ["no", "bye", "tata", "later", "cya", "exit", "quit", "close"]
+    short_byes = ["no", "bye","by","byebye","bibi","byyyyyyeeee","tataaa","hola","bibye", "tata", "later", "cya", "exit", "quit", "close"]
     if any(word in words for word in short_byes):
         return True
     
@@ -587,6 +625,28 @@ def is_capability_question(query: str) -> bool:
                           "what can u", "what do u", "what you do"]
     q_lower = query.lower().strip()
     return any(p in q_lower for p in capability_patterns)
+def is_location_query(query: str) -> bool:
+    """Check if user is asking for location/map/directions"""
+    q_lower = query.lower().strip()
+    
+    location_keywords = [
+        "location",
+        "where is asiet",
+        "map",
+        "directions",
+        "how to reach",
+        "address",
+        "venue location",
+        "asiet address",
+        "asiet location",
+        "how to get to asiet",
+        "find asiet",
+        "asiet on map",
+        "where is the campus",
+        "campus location"
+    ]
+    
+    return any(keyword in q_lower for keyword in location_keywords)
 
 def is_simple_fest_query(query: str) -> bool:
     """Check if it's a simple 'what is brahma/ashwamedha' query"""
@@ -630,6 +690,21 @@ def is_simple_fest_query(query: str) -> bool:
     words = q_normalized.split()
     if len(words) <= 3:
         if any(fest in q_normalized for fest in ["brahma", "brama", "ashwamedha", "aswamedha"]):
+            return True
+    
+    return False
+def is_asiet_only_query(query: str) -> bool:
+    """Reject queries that are just college name without fest context"""
+    q_lower = query.lower().strip()
+    
+    # Just college name alone
+    if q_lower in ["asiet", "asiet college", "what is asiet", "about asiet"]:
+        return True
+    
+    # Has asiet but NO event/fest keywords
+    if "asiet" in q_lower:
+        event_keywords = ["event", "fest", "festival", "brahma", "ashwamedha", "cultural", "technical", "competition", "register"]
+        if not any(kw in q_lower for kw in event_keywords):
             return True
     
     return False
@@ -738,6 +813,12 @@ def chat(user_message: str) -> str:
                 analytics["pattern_matches"]["abuse"] += 1
             return random.choice(ABUSE_RESPONSES)
         
+        other_colleges = ["prayag", "iit ", "nit ", "manipal", "vit ", "bits ", "amrita", "jec", "iiit"]
+        if any(college in query.lower() for college in other_colleges):
+            if analytics:
+                analytics["pattern_matches"]["other_college"] = analytics["pattern_matches"].get("other_college", 0) + 1
+            return random.choice(OUT_OF_CONTEXT_RESPONSES)
+        
         # 2. PLEASANTRIES: Handle conversational elements early
         if is_greeting(query):
             if analytics:
@@ -758,31 +839,25 @@ def chat(user_message: str) -> str:
             if analytics:
                 analytics["pattern_matches"]["okay"] += 1
             return random.choice(OKAY_RESPONSES)
-        
-        # 3. FEST INFO: Simple "what is brahma/ashwamedha" queries (before complex matching)
-        fest = fuzzy_fest_match(query)
-        if fest and is_simple_fest_query(query):
+        if is_location_query(query):
             if analytics:
-                analytics["pattern_matches"]["fest_info"] += 1
+                analytics["pattern_matches"]["location"] = analytics["pattern_matches"].get("location", 0) + 1
+            return random.choice(LOCATION_RESPONSES)
+        if is_registration_query(query):
+            if analytics:
+                analytics["pattern_matches"]["registration"] += 1
+            fest = fuzzy_fest_match(query)
             if fest == "brahma":
-                return random.choice(BRAHMA_RESPONSES)
+                return random.choice(BRAHMA_REGISTRATION_RESPONSES)
             if fest == "ashwamedha":
-                return random.choice(ASHWAMEDHA_RESPONSES)
-
-        # 4. RELEVANCE CHECK: Early exit for irrelevant queries (before expensive operations)
-        if not is_relevant_query(query):
-            if analytics:
-                analytics["pattern_matches"]["out_of_context"] += 1
-            return random.choice(OUT_OF_CONTEXT_RESPONSES)
-        
-        # 5. PRIMARY PURPOSE: Event matching (fast, direct lookup)
-        event = find_exact_event(query)
-        if event:
-            if analytics:
-                analytics["event_matches"] += 1
-            return format_event_response(event, query)
-        
-        # 6. EVENT LISTS: Check if user wants list of events
+                return random.choice(ASHWAMEDHA_REGISTRATION_RESPONSES)
+            # Fallback if fest not mentioned
+            return (
+                "Please specify the fest you want to register for.\n\n"
+                "You can say:\n"
+                "• Register for Brahma '26\n"
+                "• Register for Ashwamedha '26"
+            )
         if is_event_list_query(query):
             if analytics:
                 analytics["pattern_matches"]["event_list"] += 1
@@ -824,22 +899,39 @@ def chat(user_message: str) -> str:
                 )
                 return format_event_list("ASIET Festivals", all_events)
         
-        # 7. REGISTRATION: Important action queries
-        if is_registration_query(query):
+        # 3. FEST INFO: Simple "what is brahma/ashwamedha" queries (before complex matching)
+        fest = fuzzy_fest_match(query)
+        if fest and is_simple_fest_query(query):
             if analytics:
-                analytics["pattern_matches"]["registration"] += 1
-            fest = fuzzy_fest_match(query)
+                analytics["pattern_matches"]["fest_info"] += 1
             if fest == "brahma":
-                return random.choice(BRAHMA_REGISTRATION_RESPONSES)
+                return random.choice(BRAHMA_RESPONSES)
             if fest == "ashwamedha":
-                return random.choice(ASHWAMEDHA_REGISTRATION_RESPONSES)
-            # Fallback if fest not mentioned
+                return random.choice(ASHWAMEDHA_RESPONSES)
+        # FIXED: Reject college name only queries
+        if is_asiet_only_query(query):
+            if analytics:
+                analytics["pattern_matches"]["asiet_query"] = analytics["pattern_matches"].get("asiet_query", 0) + 1
             return (
-                "Please specify the fest you want to register for.\n\n"
-                "You can say:\n"
-                "• Register for Brahma '26\n"
-                "• Register for Ashwamedha '26"
+                "I'm specifically here to help with Brahma '26 and Ashwamedha '26 events!\n\n"
+                "ASIET has two major festivals:\n"
+                "🎭 **Brahma '26** - Cultural Festival\n"
+                "⚙️ **Ashwamedha '26** - Technical Festival\n\n"
+                "Ask me about specific events or how to register!"
             )
+
+        # 4. RELEVANCE CHECK: Early exit for irrelevant queries (before expensive operations)
+        if not is_relevant_query(query):
+            if analytics:
+                analytics["pattern_matches"]["out_of_context"] += 1
+            return random.choice(OUT_OF_CONTEXT_RESPONSES)
+        
+        # 5. PRIMARY PURPOSE: Event matching (fast, direct lookup)
+        event = find_exact_event(query)
+        if event:
+            if analytics:
+                analytics["event_matches"] += 1
+            return format_event_response(event, query)
 
         # 8. SEMANTIC SEARCH: Complex queries (more expensive, used as last resort)
         try:
@@ -894,18 +986,35 @@ def format_event_response(event: dict, query: str = "") -> str:
     
     q_lower = query.lower()
     
-    # Detect what specific info is being asked
-    asking_venue = any(word in q_lower for word in ["venue", "venu", "vanue", "vennue", "where", "wher", "were", "whre", "location", "lokation", "locaton", "loaction", "place", "plase", "plce", "held"])
-    asking_time = any(word in q_lower for word in ["time", "tym", "tyme", "when", "wen", "whn", "start", "strt", "stat", "begin"])
-    asking_date = any(word in q_lower for word in ["date", "dat", "dait", "day", "when", "wen", "whn"])
-    asking_coordinator = any(word in q_lower for word in ["coordinator", "cordinator", "coordinater", "co-ordinator", "coordnator", "contact", "contct", "cantact", "contat", "who", "organize", "organise", "orgnaize", "organiz", "reach", "phone", "fone", "phon", "phn", "number", "nmbr", "numbr", "no", "num", "call", "mobile", "mobil", "moble", "organizer", "organiser", "organisor", "incharge", "in-charge"])
-    asking_what = any(word in q_lower for word in ["what", "wat", "wht", "about", "abt", "abut", "detail", "details", "detial", "detal", "describe", "descibe", "descrbe"])
-    asking_fest = any(word in q_lower for word in ["fest", "fst", "fiest", "festival", "festivel", "festivl", "festval", "occasion"])
-    asking_slots = any(word in q_lower for word in ["slots", "sloat", "slts", "seats", "seets", "sats", "vacancy", "available", "availble", "avaiable", "avalable", "limit"])
-    asking_poster = any(word in q_lower for word in ["poster", "postr", "pster", "image", "imge", "img", "picture", "pic", "pictur", "pict", "flyer"])
-    asking_amount = any(word in q_lower for word in ["amount", "ammount", "amnt", "amt", "price", "pric", "prise", "fee", "fe", "fees", "cost", "cst", "coost", "registration", "registraton", "regestration", "charge", "charg", "chrg", "charges", "money", "pay", "payment", "payement", "paymnt", "paid", "rates", "pricing", "how much"])
-    asking_category = any(word in q_lower for word in ["category", "categry", "catagory", "catgory", "type", "typ", "tipe", "kind", "genre"])
+    # Extract words for whole-word matching to avoid false positives like "fever" matching "fee"
+    q_words = set(re.findall(r"\b[a-zA-Z]+\b", q_lower))
     
+    # Helper function for whole-word keyword checking
+    def has_keyword(keywords):
+        """Check if any keyword exists as a whole word in query"""
+        return any(keyword in q_words for keyword in keywords)
+    
+    # Detect what specific info is being asked using WHOLE WORD matching
+    asking_venue = has_keyword(["venue", "venu", "vanue", "vennue", "where", "wher", "were", "whre", "location", "lokation", "locaton", "loaction", "place", "plase", "plce", "held"])
+    
+    asking_time = has_keyword(["time", "tym", "tyme", "when", "wen", "whn", "start", "strt", "stat", "begin"])
+    
+    asking_date = has_keyword(["date", "dat", "dait", "day", "when", "wen", "whn"])
+    
+    asking_coordinator = has_keyword(["coordinator", "cordinator", "coordinater", "coordnator", "contact", "contct", "cantact", "contat", "who", "organize", "organise", "orgnaize", "organiz", "reach", "phone", "fone", "phon", "phn", "number", "nmbr", "numbr", "num", "call", "mobile", "mobil", "moble", "organizer", "organiser", "organisor", "incharge"]) or "in-charge" in q_lower or "co-ordinator" in q_lower
+    
+    asking_what = has_keyword(["what", "wat", "wht", "about", "abt", "abut", "detail", "details", "detial", "detal", "describe", "descibe", "descrbe"])
+    
+    asking_fest = has_keyword(["fest", "fst", "fiest", "festival", "festivel", "festivl", "festval", "occasion"])
+    
+    asking_slots = has_keyword(["slots", "sloat", "slts", "seats", "seets", "sats", "vacancy", "available", "availble", "avaiable", "avalable", "limit"])
+    
+    asking_poster = has_keyword(["poster", "postr", "pster", "image", "imge", "img", "picture", "pic", "pictur", "pict", "flyer"])
+    
+    # FIXED: Amount keywords now use whole-word matching to avoid "fever" matching "fee"
+    asking_amount = has_keyword(["amount", "ammount", "amnt", "amt", "price", "pric", "prise", "fee", "fees", "cost", "cst", "coost", "registration", "registraton", "regestration", "charge", "charg", "chrg", "charges", "money", "pay", "payment", "payement", "paymnt", "paid", "rates", "pricing", "much"]) or "how much" in q_lower
+    
+    asking_category = has_keyword(["category", "categry", "catagory", "catgory", "type", "typ", "tipe", "kind", "genre"])
     # Count how many aspects are being asked
     aspects_count = sum([
         asking_venue, asking_time, asking_date, asking_coordinator, asking_what,
@@ -1430,19 +1539,19 @@ def format_event_response(event: dict, query: str = "") -> str:
         (f" You can contact {coordinator}{phone_info} for more details." if coordinator != "not specified" else ""),
         
         f"Sure! {name} is a {category} event in {fest} scheduled for {date} at {time}. {details} Venue: {venue}. Amount: {amount}." +
-        (f" For more info, reach out to {coordinator}." if coordinator != "not specified" else ""),
+        (f" For more info, reach out to {coordinator}{phone_info} ." if coordinator != "not specified" else ""),
         
         f"{name} will be held on {date} at {time} at {venue}. This {category} event has {slots} slots and a fee of {amount}. {details}" +
-        (f" If you have questions, contact {coordinator}." if coordinator != "not specified" else ""),
+        (f" If you have questions, contact {coordinator}{phone_info} ." if coordinator != "not specified" else ""),
         
         f"Great question! {name} takes place on {date} at {time}. {details} Category: {category}. It's being held at {venue}." +
-        (f" The coordinator is {coordinator}." if coordinator != "not specified" else ""),
+        (f" The coordinator is {coordinator}{phone_info} ." if coordinator != "not specified" else ""),
         
         f"{name} is on {date} at {time}, venue is {venue}. This {fest} event costs {amount}. {details}" +
-        (f" Get in touch with {coordinator} if you need more info." if coordinator != "not specified" else ""),
+        (f" Get in touch with {coordinator}{phone_info}  if you need more info." if coordinator != "not specified" else ""),
         
         f"{name} - {details} Category: {category}. Scheduled for {date} at {time}. Location: {venue}. Fee: {amount}." +
-        (f" Contact: {coordinator}." if coordinator != "not specified" else "")
+        (f" Contact: {coordinator}{phone_info} ." if coordinator != "not specified" else "")
     ]
     
     return random.choice(templates)

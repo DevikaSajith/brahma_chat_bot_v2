@@ -26,7 +26,7 @@ def fetch_events_from_firestore():
             "coordinator": data.get("coordinator"),
             "fest": data.get("fest"),
             "slots": data.get("slots"),
-            "poster": data.get("poster"),
+            #"poster": data.get("poster"),
             "amount": data.get("amount"),
             "phone_number":doc.get("phone_number"),
             "category": data.get("category")
