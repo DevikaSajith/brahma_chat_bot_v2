@@ -2,22 +2,36 @@
 
 import { useState, useRef, useEffect } from 'react';
 
-// 1. Define the shape of the message object
+// 1. Define the Message interface
 interface Message {
   role: 'bot' | 'user';
   text: string;
 }
 
 export default function Home() {
-  // 2. Add types to State hooks
+  // 2. Add type annotation to State
   const [messages, setMessages] = useState<Message[]>([
     { role: 'bot', text: 'Welcome to Brahma \'26. How can I assist you?' }
   ]);
   const [input, setInput] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-
-  // 3. Add type to useRef (HTMLDivElement is the specific type for a <div>)
+  
+  // 3. Add type annotation to Ref (HTMLDivElement for a div)
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Convert newlines to <br> and make URLs clickable
+  const formatMessage = (text: string): string => {
+    // Convert \n to <br>
+    let formatted = text.replace(/\n/g, '<br>');
+    
+    // Make URLs clickable - match http:// or https:// but exclude closing parentheses
+    formatted = formatted.replace(
+      /(https?:\/\/[^\s<)]+)/g,
+      '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: #00d4ff; font-weight: bold; text-decoration: underline; cursor: pointer;">$1</a>'
+    );
+    
+    return formatted;
+  };
 
   // Auto-scroll
   useEffect(() => {
@@ -29,19 +43,31 @@ export default function Home() {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const userMsg: Message = { role: 'user', text: input };
+    // Use a temporary variable for the user message before formatting
+    const userMsgText = input;
+    const userMsg: Message = { role: 'user', text: userMsgText };
+    
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMsg.text }),
-      });
+        // Ensure process.env variable is typed as string (or undefined)
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+        
+        const res = await fetch(
+          `${backendUrl}/chat`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMsg.text }),
+          }
+        );
+
       const data = await res.json();
-      setMessages((prev) => [...prev, { role: 'bot', text: data.reply }]);
+      // Format the bot's reply
+      const formattedReply = formatMessage(data.reply);
+      setMessages((prev) => [...prev, { role: 'bot', text: formattedReply }]);
     } catch (e) {
       setMessages((prev) => [...prev, { role: 'bot', text: 'Error: System Offline' }]);
     } finally {
@@ -49,7 +75,7 @@ export default function Home() {
     }
   };
 
-  // 4. Helper for type-safe keyboard events
+  // 4. Add type annotation for keyboard events
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       sendMessage();
@@ -62,7 +88,7 @@ export default function Home() {
 
       <div className="chat-header">
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          {/* Ensure the file name matches your public folder exactly */}
+          {/* Ensure the image path is correct in your public folder */}
           <img src="/brahma_logo.jpg" alt="Logo" className="header-logo" />
           <h1 className="chat-title">BRAHMA <span style={{ color: 'var(--brahma-cyan)' }}>BOT</span></h1>
         </div>
@@ -75,7 +101,8 @@ export default function Home() {
         {messages.map((msg, idx) => (
           <div key={idx} className={`message ${msg.role === 'user' ? 'user-msg' : 'bot-msg'}`}>
             {msg.role === 'bot' && <strong>SYSTEM: </strong>}
-            {msg.text}
+            {/* Using dangerouslySetInnerHTML to render the clickable links/br tags */}
+            <div dangerouslySetInnerHTML={{ __html: msg.text }} />
           </div>
         ))}
 
