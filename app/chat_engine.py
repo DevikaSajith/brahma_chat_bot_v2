@@ -134,7 +134,7 @@ BRAHMA_REGISTRATION_RESPONSES = [
 
 ASHWAMEDHA_REGISTRATION_RESPONSES = [
     "To register for Ashwamedha '26:\n\n"
-    "1. Visit the official Ashwamedha '26 page: (https://www.asietfest.in/ashwamedha)\n\n"
+    "1. Visit the official Ashwamedha '26 page: (https://ashwamedha26.vercel.app/)\n\n"
     "2. Each participant must register individually\n\n"
     "3. Create or join your team using the registered IDs\n\n"
     "4. Complete the payment process\n\n"
