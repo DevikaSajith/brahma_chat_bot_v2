@@ -40,32 +40,27 @@ export default function Home() {
     }
   }, [messages]);
 
-  const sendMessage = async () => {
+  const sendMessage = async (): Promise<void> => {
     if (!input.trim()) return;
 
-    // Use a temporary variable for the user message before formatting
-    const userMsgText = input;
-    const userMsg: Message = { role: 'user', text: userMsgText };
-    
+    const userMsg: Message = { role: 'user', text: input };
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
     setLoading(true);
 
     try {
-        // Ensure process.env variable is typed as string (or undefined)
-        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-        
-        const res = await fetch(
-          `${backendUrl}/chat`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userMsg.text }),
-          }
-        );
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+      
+      const res = await fetch(
+        `${backendUrl}/chat`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userMsg.text }),
+        }
+      );
 
       const data = await res.json();
-      // Format the bot's reply
       const formattedReply = formatMessage(data.reply);
       setMessages((prev) => [...prev, { role: 'bot', text: formattedReply }]);
     } catch (e) {
@@ -76,7 +71,7 @@ export default function Home() {
   };
 
   // 4. Add type annotation for keyboard events
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
       sendMessage();
     }
@@ -88,7 +83,6 @@ export default function Home() {
 
       <div className="chat-header">
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          {/* Ensure the image path is correct in your public folder */}
           <img src="/brahma_logo.jpg" alt="Logo" className="header-logo" />
           <h1 className="chat-title">BRAHMA <span style={{ color: 'var(--brahma-cyan)' }}>BOT</span></h1>
         </div>
@@ -101,7 +95,6 @@ export default function Home() {
         {messages.map((msg, idx) => (
           <div key={idx} className={`message ${msg.role === 'user' ? 'user-msg' : 'bot-msg'}`}>
             {msg.role === 'bot' && <strong>SYSTEM: </strong>}
-            {/* Using dangerouslySetInnerHTML to render the clickable links/br tags */}
             <div dangerouslySetInnerHTML={{ __html: msg.text }} />
           </div>
         ))}
