@@ -170,3 +170,19 @@ button {
   50% { opacity: 0.5; }
   100% { opacity: 1; }
 }
+a {
+  cursor: pointer !important;
+  pointer-events: all !important;
+}
+
+.message a {
+  color: #00d4ff !important;
+  font-weight: bold !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}
+
+.message a:hover {
+  color: #00ffff !important;
+  opacity: 0.8;
+}
