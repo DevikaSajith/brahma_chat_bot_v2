@@ -1,7 +1,7 @@
 # Lightweight in-memory cache with size limits
 EVENT_CACHE = []
 EVENT_INDEX = {}
-MAX_EVENTS = 100  # Limit number of cached events
+MAX_EVENTS = 140  # Limit number of cached events
 
 def load_event_cache(events):
     """
