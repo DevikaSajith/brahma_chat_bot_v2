@@ -134,7 +134,7 @@ BRAHMA_REGISTRATION_RESPONSES = [
 
 ASHWAMEDHA_REGISTRATION_RESPONSES = [
     "To register for Ashwamedha '26:\n\n"
-    "1. Visit the official Ashwamedha '26 page: (https://ashwamedha26.vercel.app/)\n\n"
+    "1. Visit the official Ashwamedha '26 page: (https://www.ashwamedha26.live)\n\n"
     "2. Each participant must register individually\n\n"
     "3. Create or join your team using the registered IDs\n\n"
     "4. Complete the payment process\n\n"
@@ -144,87 +144,13 @@ ASHWAMEDHA_REGISTRATION_RESPONSES = [
 ]
 # ---------------- EVENT LIST RESPONSES ---------------- #
 
-BRAHMA_GENERAL_EVENTS = [
-    "Soap Soccer",
-    "BGMI (Online)",
-    "Shoutout Clash",
-    "Carnival Nexus",
-    "Clue Crusade",
-    "Game of Rooms",
-    "Challengers Arena",
-    "Knives Out",
-    "Paint Ball",
-    "Spot Photography",
-    "ASIET Talkies",
-    "Retro Carroms",
-    "FIFA Fever",
-    "Product Pioneers",
-    "Underarm Cricket",
-    "Militia Madness",
-    "R J Hunt",
-    "Pitch in 120 Seconds",
-    "Strike 3",
-    "Sumo Wrestling",
-    "IPL Auction",
-    "Guess-O-Holic",
-    "Gyro Glide",
-    "Valorant (Online)",
-    "E Football (Online)",
-    "Glow Ball",
-    "AFT Workshop"
-]
+BRAHMA_GENERAL_EVENTS = [ "Soapy Soccer", "BGMI TDM (Online)", "Shootout Clash", "Carnival Nexus (feb 6/7)", "Clue Crusade", "Game of Rooms", "Challenger Arena (feb 7/8)", "Knives Out", "Paintball", "Spot Photography", "ASIET Talkies", "Retro Carroms", "Fifa Fever", "Product Pioneers", "Underarm Cricket", "MILITIA MADNESS", "RJ Hunt", "Pitch in 120s", "Strike 3", "Sumo Wrestling", "IPL AUCTION", "Popcorn Brainstorm", "KICKOFF MANIA (eFootball)", "Valorant Tournament (Online)", "Glow Ball" ]
 
-BRAHMA_CULTURAL_EVENTS = [
-    "Doodling",
-    "Mime",
-    "Band of Brahma",
-    "Ragam",
-    "Step N Syncro",
-    "Spot Dance",
-    "Mudhra",
-    "Voice of Brahma",
-    "DJ War",
-    "Choreo Night",
-    "Theme Show"
-]
+BRAHMA_CULTURAL_EVENTS = [ "Alekhya (Doodling)", "Mimoria (Mime)", "Band of Brahma", "Ragam", "Soulsync", "Syncopate (Spot Dance)", "Mudhra (Kuchippudi, Bharathanatyam, Mohiniyattam)", "Voice Of Brahma", "DJ War / Final Drop", "Rhythmic Reign", "Evoque (Theme Show)", "Hasya (Stand-up Comedy)", "Street Show", "Rapocalypse" ]
 
-# Fake technical events for Brahma (temporary)
-BRAHMA_TECHNICAL_EVENTS = [
-    "Code Blitz",
-    "Debug Dominion",
-    "HackSprint",
-    "Logic Lords",
-    "Binary Battle",
-    "Tech Quest"
-]
+BRAHMA_TECHNICAL_EVENTS = [ "Web Craft", "Flowvision Hackathon", "FPGA WORKSHOP", "N8N Workshop", "RC Lapz", "Idea pitching", "Civil X-plore", "Robo soccer", "Synapse Spark (Ideathon)", "BIM Workshop", "Civil Clash", "Antenna Design Workshop" ]
 
-ASHWAMEDHA_TECHNICAL_EVENTS = [
-    "Capture the Flag – Cyber Security Hackathon",
-    "Neuro Clash",
-    "Prompt & Roast (AI Prompting)",
-    "Eyes Off",
-    "PlanScape",
-    "Structostick",
-    "Paradox Arena",
-    "Stranger Games",
-    "Synapse Spark (Ideathon)",
-    "Code Red Clues (Escape Room)",
-    "Robo Pixel – ML/AI",
-    "Line Follower",
-    "Circuit Bombing",
-    "Electrothon",
-    "Tech Trivia",
-    "Remote Car Race",
-    "VR Experience",
-    "Technical Treasure Hunt",
-    "TECH FUSION 25 (Workshop Series)",
-    "Drone Show and Expo",
-    "IoT Based Workshop",
-    "Thinker Hub",
-    "Workshop (FPGA)"
-]
-
-
+ASHWAMEDHA_TECHNICAL_EVENTS = [ "Capture The Flag", "NeuroClash", "Prompt And Roast", "Eyes Off", "PlanScape", "Structostick", "Paradox arena", "Synapse Spark (Ideathon)", "CODE RED CLUES (ESCAPE ROOM)", "RoboPixel", "Line Follower Competition", "Circuit Bombing", "Electrothon", "Turing Trails (Treasure Hunt)", "RC race / RC Lapz", "VR Experience / V-Raya", "Drone Show and Project Expo", "IOT based workshop", "Fast API Workshop", "AutoCAD Workshop", "Quad Bike Workshop", "N8N Workshop", "No code app building workshop", "Intellisense", "Prompt pulse", "Control Code - ESP32 & Raspberry Pi", "Gokart workshop", "RekhaChitram", "Led Making", "SAMAGRA 3.O", "Sketch Up", "Infinity castle" ]
 
 BYE_RESPONSES = [
     "Goodbye! See you at Brahma '26! 🎉",
@@ -722,7 +648,7 @@ def is_relevant_query(query: str) -> bool:
         return True
     
     # Check if query matches any event name from cache (even partially)
-    for event in EVENT_CACHE[:50]:  # Check first 50 events
+    for event in EVENT_CACHE[:140]:  # Check first 50 events
         event_name = event.get("event_name", "").lower()
         if event_name:
             event_tokens = tokenize(event_name)
